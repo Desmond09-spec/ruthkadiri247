@@ -299,28 +299,29 @@
             </div>
         </div>
 
+        <p id="myText">This is a very long text that should be shortened.</p>
+
         <!-- End of body -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
         <script>
             window.addEventListener("load", function () {
-  const loader = document.getElementById("loader");
-  const container = document.querySelector(".container");
-  if (loader) {
-    loader.style.display = "none";
-    container.classList.remove("blurred");
-  }
-});
+                const loader = document.getElementById("loader");
+                const container = document.querySelector(".container");
+                if (loader) {
+                    loader.style.display = "none";
+                    container.classList.remove("blurred");
+                }
+            });
 
-window.addEventListener("DOMContentLoaded", function () {
-  const container = document.querySelector(".container");
-  const loader = document.getElementById("loader");
-  // When loader is visible (on page start), blur the background
-  if (loader && container) {
-    container.classList.add("blurred");
-  }
-});
-
+            window.addEventListener("DOMContentLoaded", function () {
+                const container = document.querySelector(".container");
+                const loader = document.getElementById("loader");
+                // When loader is visible (on page start), blur the background
+                if (loader && container) {
+                    container.classList.add("blurred");
+                }
+            });
         </script>
 
         <script>
@@ -341,9 +342,15 @@ window.addEventListener("DOMContentLoaded", function () {
 
                         // Add 'active' to the clicked link
                         this.classList.add("active");
+                        
+                        function truncate(text, limit) {
+    return text.length > limit ? text.slice(0, limit) + "..." : text;
+}
+
 
                         // Update the brand text
-                        brand.textContent = this.textContent.trim();
+                       brand.textContent = truncate(this.textContent.trim(), 8);
+
 
                         // Collapse the navbar menu (on mobile)
                         if (navbarCollapse.classList.contains("show")) {
