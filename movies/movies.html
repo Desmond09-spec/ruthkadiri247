@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Our Movies</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+        />
+
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        />
+
+        <style>
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+
+            body,
+            html {
+                height: 100%;
+                font-family: "Segoe UI", sans-serif;
+                color: #fff;
+                overflow-x: hidden;
+            }
+
+            /* Background video */
+            .bg-video {
+                position: fixed;
+                top: 0;
+                left: 0;
+                min-width: 100vw;
+                min-height: 100vh;
+                z-index: -1;
+                object-fit: cover;
+            }
+
+            /* Overlay to darken video slightly for readability */
+            .overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.4);
+                z-index: -1;
+            }
+
+            .container {
+                padding: 2rem; /* top, right, bottom, left */
+                max-width: 1000px;
+                margin: 0 auto;
+            }
+
+            h1 {
+                text-align: center;
+                margin-bottom: 2rem;
+                font-size: 2.5rem;
+            }
+
+            .video-wrapper {
+                position: relative;
+                width: 100%;
+                padding-bottom: 56.25%; /* 16:9 aspect ratio */
+                margin-bottom: 2rem;
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+                border-radius: 12px;
+                overflow: hidden;
+            }
+
+            .video-wrapper iframe {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                border: none;
+            }
+
+            @media (max-width: 768px) {
+                h1 {
+                    font-size: 1.8rem;
+                }
+                .container {
+                    padding: 1rem; /* Keep top padding for navbar spacing */
+                }
+            }
+
+            /* New styles for home icon + navbar alignment */
+            .top-bar {
+                display: flex;
+                align-items: flex-start; /* Changed from center */
+                justify-content: space-between;
+                padding: 1rem;
+                position: static;
+                top: 0;
+                width: 100%;
+                z-index: 999;
+            }
+
+            .home-icon-wrapper {
+                text-decoration: none; /* Remove underline */
+                background: linear-gradient(
+                    to bottom,
+                    rgba(33, 37, 41, 0.8),
+                    rgba(33, 37, 41, 0.8)
+                );
+                backdrop-filter: blur(6px);
+                padding: 0.5rem 0.75rem;
+                border-radius: 12px;
+                display: flex;
+                align-items: center;
+                height: auto;
+                margin-top: 0.179rem;
+                transition: background-color 0.3s ease;
+            }
+
+            .home-icon-wrapper i {
+                color: white;
+                font-size: 2.5rem;
+                transition: color 0.3s ease;
+            }
+
+            .home-icon-wrapper:hover {
+                background: white;
+            }
+
+            .home-icon-wrapper:hover i {
+                color: rgba(33, 37, 41, 0.8);
+            }
+
+            .navbar.custom-navbar {
+                background: linear-gradient(
+                    to bottom,
+                    rgba(33, 37, 41, 0.8),
+                    rgba(33, 37, 41, 0.8)
+                );
+                backdrop-filter: blur(6px);
+                border-radius: 12px;
+                padding: 0.5rem 1rem;
+                width: auto;
+                height: auto;
+                display: flex;
+                align-items: center;
+                white-space: nowrap;
+                transition:
+                    width 0.3s ease,
+                    padding 0.3s ease;
+            }
+
+            /* Hamburger icon hover effect */
+            .navbar-toggler:hover .navbar-toggler-icon {
+                filter: brightness(0.8);
+                cursor: pointer;
+                transition: filter 0.3s ease;
+            }
+
+            #loader {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                background: rgba(0, 0, 0, 0.5);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 1050;
+            }
+
+            .blurred {
+                filter: blur(5px);
+                transition: filter 0.3s ease;
+                pointer-events: none; /* prevent interaction when blurred */
+                user-select: none;
+            }
+
+            #navbarTitle {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: 100%; /* Allow dynamic sizing */
+                display: inline-block;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="top-bar">
+            <a class="home-icon-wrapper" href="../index.html"
+                ><i class="fas fa-home"></i>
+            </a>
+
+            <nav class="navbar navbar-expand-lg navbar-dark custom-navbar">
+                <div
+                    class="container-fluid d-flex justify-content-between align-items-center"
+                >
+                    <a class="navbar-brand" href="#" id="navbarTitle">Latest</a>
+
+                    <!-- Hamburger Button -->
+                    <button
+                        class="navbar-toggler"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#navbarMenu"
+                        aria-controls="navbarMenu"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation"
+                    >
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <!-- Collapsible Menu -->
+                    <div class="collapse navbar-collapse" id="navbarMenu">
+                        <ul class="navbar-nav ms-auto">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#">Latest</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Most Popular</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Oldest</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <!-- close top-bar -->
+
+        <!-- Background Water Video -->
+        <video autoplay muted loop class="bg-video">
+            <source src="video-background.mp4" type="video/mp4" />
+            Your browser does not support HTML5 video.
+        </video>
+
+        <!-- Dark overlay for readability -->
+        <div class="overlay"></div>
+
+        <!-- Content Container -->
+        <div class="container">
+            <!--  <h1>My YouTube Video Collection</h1> -->
+
+            <!-- Embedded YouTube Videos -->
+            <div class="video-wrapper" id="bolaji-and-the-mans-wife">
+                <iframe
+                    src="https://youtube.com/embed/TDP76lfpmP8"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    loading="lazy"
+                    allowfullscreen
+                    title="Bolaji and the Man's Wife - Words Pierce Harder Than A Stab"
+                ></iframe>
+            </div>
+
+            <div class="video-wrapper">
+                <iframe
+                    src="https://www.youtube.com/embed/zpxA2YAP68Q"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    loading="lazy"
+                    allowfullscreen
+                    title="Expensive Househelps - Diary of a Lagos Househelp"
+                ></iframe>
+            </div>
+
+            <div class="video-wrapper">
+                <iframe
+                    src="https://www.youtube.com/embed/mbbcOrR_lU8"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    loading="lazy"
+                    allowfullscreen
+                    title="Blank Cheque - What You See Sometimes is not What You Get"
+                ></iframe>
+            </div>
+
+            <div class="video-wrapper">
+                <iframe
+                    src="https://www.youtube.com/embed/4KPvYzHsL2k"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    loading="lazy"
+                    allowfullscreen
+                    title="Royal Company - Inflow of the Palace"
+                ></iframe>
+            </div>
+
+            <div class="video-wrapper">
+                <iframe
+                    src="https://www.youtube.com/embed/wBDl7HSGtUs"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    loading="lazy"
+                    allowfullscreen
+                    title="Tunde and Ajoke - Wealth or Heart, What Would it Be?"
+                ></iframe>
+            </div>
+        </div>
+        <div id="loader">
+            <div
+                class="spinner-grow text-secondary"
+                style="width: 3rem; height: 3rem"
+                role="status"
+            >
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+
+        <!-- End of body -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+        <script>
+            window.addEventListener("load", function () {
+                const loader = document.getElementById("loader");
+                const container = document.querySelector(".container");
+                if (loader) {
+                    loader.style.display = "none";
+                    container.classList.remove("blurred");
+                }
+            });
+
+            window.addEventListener("DOMContentLoaded", function () {
+                const container = document.querySelector(".container");
+                const loader = document.getElementById("loader");
+                // When loader is visible (on page start), blur the background
+                if (loader && container) {
+                    container.classList.add("blurred");
+                }
+            });
+        </script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const navLinks = document.querySelectorAll(".nav-link");
+                const brand = document.getElementById("navbarTitle");
+                const navbarCollapse = document.getElementById("navbarMenu");
+                const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+                    toggle: false // Prevent automatic toggle
+                });
+
+                navLinks.forEach(link => {
+                    link.addEventListener("click", function (e) {
+                        e.preventDefault();
+
+                        // Remove 'active' from all links
+                        navLinks.forEach(l => l.classList.remove("active"));
+
+                        // Add 'active' to the clicked link
+                        this.classList.add("active");
+
+                        // Update the brand text
+                        brand.textContent = this.textContent.trim();
+
+                        // Collapse the navbar menu (on mobile)
+                        if (navbarCollapse.classList.contains("show")) {
+                            bsCollapse.hide();
+                        }
+                    });
+                });
+            });
+        </script>
+
+        <script>
+            function updateNavbarTitleWidth() {
+                const homeIcon = document.querySelector(".home-icon-wrapper");
+                const navbar = document.querySelector(".custom-navbar");
+                const title = document.getElementById("navbarTitle");
+
+                if (homeIcon && navbar && title) {
+                    const homeRect = homeIcon.getBoundingClientRect();
+                    const navbarRect = navbar.getBoundingClientRect();
+
+                    // Space between home icon's right and navbar's left
+                    const space = navbarRect.left - homeRect.right;
+
+                    // If space is greater than 1rem (~16px), allow title up to that width
+                    const buffer = 1; // 1rem = 16px
+                    const maxTitleWidth = Math.max(0, space - buffer);
+
+                    // Apply max-width in pixels
+                    title.style.maxWidth = maxTitleWidth + "px";
+                }
+            }
+
+            function debounce(fn, delay) {
+                let timer;
+                return function () {
+                    clearTimeout(timer);
+                    timer = setTimeout(fn, delay);
+                };
+            }
+            window.addEventListener(
+                "resize",
+                debounce(updateNavbarTitleWidth, 100)
+            );
+
+            window.addEventListener("DOMContentLoaded", updateNavbarTitleWidth);
+        </script>
+    </body>
+</html>
