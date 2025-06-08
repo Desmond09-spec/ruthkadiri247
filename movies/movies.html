@@ -187,6 +187,34 @@
                 max-width: 100%; /* Allow dynamic sizing */
                 display: inline-block;
             }
+
+            .download-wrapper {
+                position: absolute;
+                top: 50%;
+                left: 0.5rem; /* 2rem spacing from the left */
+                transform: translateY(-50%); /* Perfect vertical centering */
+                background: linear-gradient(
+                    to bottom,
+                    rgba(33, 37, 41, 0.8),
+                    rgba(33, 37, 41, 0.8)
+                );
+                color: white;
+                width: 25px;
+                height: 25px;
+                border-radius: 8px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+            }
+
+            .download-wrapper:hover i {
+                color: rgba(33, 37, 41, 0.8);
+            }
+
+            .download-wrapper:hover {
+                background: white;
+            }
         </style>
     </head>
     <body>
@@ -247,6 +275,7 @@
             <!--  <h1>My YouTube Video Collection</h1> -->
 
             <!-- Embedded YouTube Videos -->
+
             <div class="video-wrapper" id="bolaji-and-the-mans-wife">
                 <iframe
                     src="https://youtube.com/embed/TDP76lfpmP8"
@@ -254,7 +283,12 @@
                     loading="lazy"
                     allowfullscreen
                     title="Bolaji and the Man's Wife - Words Pierce Harder Than A Stab"
-                ></iframe>
+                >
+                </iframe>
+
+                <a class="download-wrapper">
+                    <i class="fa-solid fa-download fa-fade"></i>
+                </a>
             </div>
 
             <div class="video-wrapper">
@@ -265,6 +299,10 @@
                     allowfullscreen
                     title="Expensive Househelps - Diary of a Lagos Househelp"
                 ></iframe>
+                
+                <a class="download-wrapper">
+                    <i class="fa-solid fa-download fa-fade"></i>
+                </a>
             </div>
 
             <div class="video-wrapper">
@@ -275,6 +313,10 @@
                     allowfullscreen
                     title="Blank Cheque - What You See Sometimes is not What You Get"
                 ></iframe>
+                
+                <a class="download-wrapper">
+                    <i class="fa-solid fa-download fa-fade"></i>
+                </a>
             </div>
 
             <div class="video-wrapper">
@@ -285,6 +327,10 @@
                     allowfullscreen
                     title="Royal Company - Inflow of the Palace"
                 ></iframe>
+                
+                <a class="download-wrapper">
+                    <i class="fa-solid fa-download fa-fade"></i>
+                </a>
             </div>
 
             <div class="video-wrapper">
@@ -295,6 +341,10 @@
                     allowfullscreen
                     title="Tunde and Ajoke - Wealth or Heart, What Would it Be?"
                 ></iframe>
+                
+                <a class="download-wrapper">
+                    <i class="fa-solid fa-download fa-fade"></i>
+                </a>
             </div>
         </div>
         <div id="loader">
