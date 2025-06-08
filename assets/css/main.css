@@ -4165,7 +4165,7 @@ input, select, textarea {
     height: 100%;
     object-fit: cover;
     z-index: 0;
-    filter: brightness(0.25) saturate(0.8) blur(2px);  /* 0.5 means 50% brightness */
+    filter: brightness(0.75) saturate(0.8) blur(2px);  /* 0.5 means 50% brightness */
 }
 
 
