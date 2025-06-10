@@ -88,7 +88,7 @@
                     font-size: 1.8rem;
                 }
                 .container {
-                    padding: 1rem; /* Keep top padding for navbar spacing */
+                    padding: 6rem 1rem 1rem 1rem; /* Keep top padding for navbar spacing */
                 }
             }
 
@@ -98,10 +98,18 @@
                 align-items: flex-start; /* Changed from center */
                 justify-content: space-between;
                 padding: 1rem;
-                position: static;
+                position: fixed;
                 top: 0;
                 width: 100%;
                 z-index: 999;
+
+                background: linear-gradient(
+                    to bottom,
+                    rgba(25, 29, 33, 0.25),
+                    /* Darkened RGB values while maintaining 0.55 opacity */
+                        rgba(25, 29, 33, 0.25)
+                        /* Darkened RGB values while maintaining 0.55 opacity */
+                );
             }
 
             .home-icon-wrapper {
@@ -247,7 +255,7 @@
                 border-bottom: none; /* remove default line */
             }
 
-            .modal-header::after {
+            .download_m-h::after {
                 content: "";
                 position: absolute;
                 bottom: 0;
@@ -255,6 +263,16 @@
                 transform: translateX(-50%);
                 width: 90%; /* desired line width */
                 border-bottom: 1px solid #2c3036; /* line color and thickness */
+            }
+
+            .welcome_m-h::after {
+                content: "";
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 90%;
+                border-bottom: 1.5px dotted rgba(255, 255, 255, 0.2); /* 30% visible white */
             }
 
             .modal-header .btn-close {
@@ -272,11 +290,19 @@
                 border-top: none;
             }
 
+            /* .modal-footer::before {
+                content: "";
+                display: block;
+                width: 90%;
+                margin: 0 auto;
+                border-top: 1.5px dotted rgba(255, 255, 255, 0.2);
+            } */
+
             .modal-body {
                 position: relative; /* to position ::after absolutely */
             }
 
-            .modal-body::after {
+            .download_m-b::after {
                 content: "";
                 position: absolute;
                 bottom: 0;
@@ -284,6 +310,16 @@
                 transform: translateX(-50%);
                 width: 90%;
                 border-bottom: 1px solid #2c3036;
+            }
+
+            .welcome_m-f::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 90%;
+                border-bottom: 1.5px dotted rgba(255, 255, 255, 0.2);
             }
 
             .btn-download {
@@ -299,6 +335,137 @@
                 color: #212529;
                 border: none;
             }
+
+            .nav-close-btn {
+                border: 1px solid white;
+                border-radius: 6px;
+                /* Option A: Use a specific padding for button size */
+                padding: 0.5rem 1rem; /* Example padding */
+
+                /* Option B: If you must have a fixed width, use this: */
+                /* width: 50px; */
+
+                text-align: center; /* This will center the text horizontally */
+                display: inline-block; /* Ensure it behaves like a block for text-align to work,
+                             though Bootstrap's .nav-link might already handle this.
+                             It's good to be explicit if needed. */
+            }
+
+            .nav-close-btn:hover {
+                border: none;
+                background-color: white;
+                color: #212529;
+            }
+
+            /* Only applies to the Movies modal */
+            .movies-modal .modal-content {
+                position: relative;
+                overflow: hidden;
+                color: white;
+            }
+
+            .movies-modal .modal-bg-video {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                z-index: 1; /* Adjust visibility */
+                filter: brightness(0.5) saturate(0.8) blur(5px);
+            }
+
+            .movies-modal .modal-header,
+            .movies-modal .modal-body,
+            .movies-modal .modal-footer {
+                position: relative;
+                z-index: 2;
+            }
+
+            .movies-modal .modal-content::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 100%;
+                background: rgba(0, 0, 0, 0.5); /* Optional dark overlay */
+                z-index: 1;
+            }
+
+            .movies-modal .modal-content {
+                border: 0.9px solid white;
+            }
+
+            #pageBgVideo {
+                position: fixed;
+                top: 0;
+                left: 0;
+                min-width: 100vw;
+                min-height: 100vh;
+                object-fit: cover;
+                z-index: 0;
+            }
+
+            .welcome-agree-btn {
+                background: #212529;
+
+                color: white;
+
+                border: 1px solid white;
+            }
+            .welcome-agree-btn:hover {
+                color: #212529;
+
+                background: white;
+
+                border: none;
+            }
+
+            .dont-show-again-btn {
+                color: black; /* 85% black */
+
+                background-color: white;
+            }
+            .dont-show-again-btn:hover {
+                background-color: rgba(0, 0, 0, 0.68);
+
+                color: white;
+
+                border: 1px solid white;
+            }
+
+            #screenshot-toast {
+                position: fixed;
+                bottom: 1.5rem;
+                left: 1rem;
+                right: 1rem;
+                margin: 0 auto;
+                max-width: 528px;
+                background-color: white;
+                color: #212529;
+                padding: 0.75rem 1.25rem;
+                border-radius: 1rem;
+                font-size: 0.95rem;
+                line-height: 1.4;
+                text-align: center;
+                word-wrap: break-word;
+
+                opacity: 0;
+                pointer-events: none;
+                transition:
+                    opacity 0.4s ease,
+                    transform 0.4s ease;
+
+                /* 👇 Super high priority */
+                z-index: 2147483647;
+            }
+
+            #screenshot-toast.show {
+                opacity: 1;
+                transform: translateY(-20px);
+                pointer-events: auto;
+            }
         </style>
     </head>
     <body>
@@ -307,7 +474,7 @@
                 ><i class="fas fa-home"></i>
             </a>
 
-            <nav class="navbar navbar-expand-lg navbar-dark custom-navbar">
+            <nav class="navbar navbar-dark custom-navbar">
                 <div
                     class="container-fluid d-flex justify-content-between align-items-center"
                 >
@@ -328,7 +495,7 @@
 
                     <!-- Collapsible Menu -->
                     <div class="collapse navbar-collapse" id="navbarMenu">
-                        <ul class="navbar-nav ms-auto">
+                        <ul class="navbar-nav">
                             <li class="nav-item">
                                 <a class="nav-link active" href="#">Latest</a>
                             </li>
@@ -342,6 +509,15 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="#" id="hide-icons"
                                     >Hide Download and Details icons</a
+                                >
+                            </li>
+
+                            <li class="nav-item ms-auto">
+                                <a
+                                    class="nav-link nav-close-btn"
+                                    href="#"
+                                    id="nav-close"
+                                    >Close</a
                                 >
                             </li>
                         </ul>
@@ -481,7 +657,123 @@
                     <i class="fa fa-info-circle details" aria-hidden="true"></i>
                 </a>
             </div>
+
+            <div class="video-wrapper">
+                <iframe
+                    src="https://www.youtube.com/embed/mqZ8CkGfWSI"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    loading="lazy"
+                    allowfullscreen
+                    title="Heart Budget"
+                ></iframe>
+
+                <a
+                    class="download-wrapper"
+                    type="button"
+                    class="btn btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop"
+                >
+                    <i class="fa-solid fa-download fa-fade"></i>
+                </a>
+                <a>
+                    <i class="fa fa-info-circle details" aria-hidden="true"></i>
+                </a>
+            </div>
+
+            <div class="video-wrapper">
+                <iframe
+                    src="https://www.youtube.com/embed/aI61T_6dWo0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    loading="lazy"
+                    allowfullscreen
+                    title="Streets of Heaven"
+                ></iframe>
+
+                <a
+                    class="download-wrapper"
+                    type="button"
+                    class="btn btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop"
+                >
+                    <i class="fa-solid fa-download fa-fade"></i>
+                </a>
+                <a>
+                    <i class="fa fa-info-circle details" aria-hidden="true"></i>
+                </a>
+            </div>
+
+            <div class="video-wrapper">
+                <iframe
+                    src="https://www.youtube.com/embed/t8_y-SPTmXE"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    loading="lazy"
+                    allowfullscreen
+                    title="A Life For A Life"
+                ></iframe>
+
+                <a
+                    class="download-wrapper"
+                    type="button"
+                    class="btn btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop"
+                >
+                    <i class="fa-solid fa-download fa-fade"></i>
+                </a>
+                <a>
+                    <i class="fa fa-info-circle details" aria-hidden="true"></i>
+                </a>
+            </div>
+
+            <div class="video-wrapper">
+                <iframe
+                    src="https://www.youtube.com/embed/uYfzddWciYU"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    loading="lazy"
+                    allowfullscreen
+                    title="Golden Offer"
+                ></iframe>
+
+                <a
+                    class="download-wrapper"
+                    type="button"
+                    class="btn btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop"
+                >
+                    <i class="fa-solid fa-download fa-fade"></i>
+                </a>
+                <a>
+                    <i class="fa fa-info-circle details" aria-hidden="true"></i>
+                </a>
+            </div>
+
+            <div class="video-wrapper">
+                <iframe
+                    src="https://www.youtube.com/embed/a9_gUwklLSg"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    loading="lazy"
+                    allowfullscreen
+                    title="Bare to Beauty"
+                ></iframe>
+
+                <a
+                    class="download-wrapper"
+                    type="button"
+                    class="btn btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop"
+                >
+                    <i class="fa-solid fa-download fa-fade"></i>
+                </a>
+                <a>
+                    <i class="fa fa-info-circle details" aria-hidden="true"></i>
+                </a>
+            </div>
         </div>
+        
         <div id="loader">
             <div
                 class="spinner-grow text-secondary"
@@ -503,7 +795,7 @@
         >
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header">
+                    <div class="modal-header download_m-h">
                         <h1 class="modal-title fs-5" id="staticBackdropLabel">
                             Download?
                         </h1>
@@ -514,8 +806,8 @@
                             aria-label="Close"
                         ></button>
                     </div>
-                    <div class="modal-body">...</div>
-                    <div class="modal-footer">
+                    <div class="modal-body download_m-b">...</div>
+                    <div class="modal-footer download_m-f">
                         <button
                             type="button"
                             class="btn btn-secondary"
@@ -531,8 +823,166 @@
             </div>
         </div>
 
+        <!--  <button
+           type="button"
+           class="btn btn-primary"
+           data-toggle="modal"
+           data-target="#exampleModalCenter"
+       >
+           Launch demo modal
+       </button> -->
+
+        <video
+            autoplay
+            muted
+            loop
+            playsinline
+            id="pageBgVideo"
+            style="display: none"
+        >
+            <source src="video-background.mp4" type="video/mp4" />
+        </video>
+
+        <!-- Modal -->
+        <div
+            class="modal fade movies-modal"
+            id="exampleModalCenter"
+            tabindex="-1"
+            aria-labelledby="exampleModalCenterTitle"
+            aria-hidden="true"
+        >
+            <div
+                class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
+            >
+                <div class="modal-content">
+                    <!-- VIDEO BACKGROUND -->
+                    <video
+                        autoplay
+                        muted
+                        loop
+                        playsinline
+                        class="modal-bg-video"
+                    >
+                        <source src="video-background.mp4" type="video/mp4" />
+                        Your browser does not support the video tag.
+                    </video>
+
+                    <!-- OVERLAY CONTENT -->
+                    <div class="modal-header welcome_m-h">
+                        <h5 class="modal-title" id="exampleModalCenterTitle">
+                            Welcome to the Movies page
+                        </h5>
+                        <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                        ></button>
+                    </div>
+                    <div class="modal-body welcome_m-b">
+                        Here is a quick guide on what you need to know:
+                        <ul>
+                            <br />
+                            <li>
+                                A menu bar will appear in the top-right corner
+                                of this page once this modal is dismissed. From
+                                there, you will be able to filter the movies by
+                                latest, most popular, or oldest.
+                            </li>
+                            <br />
+                            <li>
+                                Each movie will display a download icon on the
+                                left side and a details icon on the right, both
+                                positioned vertically in the middle. To download
+                                a movie, click its download icon. To view more
+                                information, click the details icon associated
+                                with that movie. The visibility of these icons
+                                can be managed from the menu bar.
+                            </li>
+                            <br />
+                            <li>
+                                You may watch and download RuthKadiri247 movies
+                                on this page. However, if you intend to download
+                                a movie, please note that all files exceed 200
+                                MB in size.”
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer welcome_m-f">
+                        <div class="footer-border"></div>
+                        <!-- <button
+                            type="button"
+                            class="btn dont-show-again-btn"
+                            data-bs-dismiss="modal"
+                        >
+                            Don't Show Again
+                        </button> -->
+                        <button
+                            type="button"
+                            class="btn welcome-agree-btn"
+                            data-bs-dismiss="modal"
+                            id="dontShowAgainBtn"
+                        >
+                            Alright
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="screenshot-toast">
+            You may need to scroll down to see the menu title in the top-right
+            corner.
+        </div>
+
         <!-- End of body -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+        <script>
+            window.addEventListener("DOMContentLoaded", () => {
+                if (!localStorage.getItem("hideMoviesModal")) {
+                    const myModal = new bootstrap.Modal(
+                        document.getElementById("exampleModalCenter")
+                    );
+                    myModal.show();
+                }
+
+                document
+                    .getElementById("dontShowAgainBtn")
+                    .addEventListener("click", () => {
+                        localStorage.setItem("hideMoviesModal", "true");
+                        showToast();
+                    });
+            });
+        </script>
+
+        <script>
+            const modal = document.getElementById("exampleModalCenter");
+            const video = document.getElementById("pageBgVideo");
+            const topBar = document.querySelector(".top-bar");
+
+            modal.addEventListener("show.bs.modal", () => {
+                video.style.display = "block";
+                topBar.style.display = "none";
+            });
+
+            modal.addEventListener("hidden.bs.modal", () => {
+                video.style.display = "none";
+                topBar.style.display = "flex";
+            });
+        </script>
+
+        <script>
+            function showToast() {
+                const toast = document.getElementById("screenshot-toast");
+
+                toast.classList.add("show");
+
+                setTimeout(() => {
+                    toast.classList.remove("show");
+                }, 6000); // visible for 2.5 seconds
+            }
+        </script>
 
         <script>
             window.addEventListener("load", function () {
@@ -559,7 +1009,7 @@
                 //      const navLinks = document.querySelectorAll(".nav-link");
                 const navLinks = Array.from(
                     document.querySelectorAll(".nav-link")
-                ).slice(0, -1);
+                ).slice(0, -2);
 
                 const brand = document.getElementById("navbarTitle");
                 const navbarCollapse = document.getElementById("navbarMenu");
@@ -631,6 +1081,8 @@
         <script>
             const hideIcons = document.getElementById("hide-icons");
 
+            const navbarCloseBtn = document.getElementById("nav-close");
+
             const navbarCollapse = document.getElementById("navbarMenu");
             const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
                 toggle: false // Prevent automatic toggle
@@ -658,6 +1110,8 @@
 
                 bsCollapse.hide();
             });
+
+            navbarCloseBtn.addEventListener("click", () => bsCollapse.hide());
         </script>
     </body>
 </html>
