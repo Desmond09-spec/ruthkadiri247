@@ -554,13 +554,13 @@
 
                 <a
                     class="download-wrapper"
-                    type="button"
-                    class="btn btn-primary"
                     data-bs-toggle="modal"
                     data-bs-target="#staticBackdrop"
+                    data-title="Bolaji and the Man's Wife - Words Pierce Harder than a Stab"
                 >
                     <i class="fa-solid fa-download fa-fade"></i>
                 </a>
+
                 <a>
                     <i class="fa fa-info-circle details" aria-hidden="true"></i>
                 </a>
@@ -581,6 +581,7 @@
                     class="btn btn-primary"
                     data-bs-toggle="modal"
                     data-bs-target="#staticBackdrop"
+                    data-title="Expensive Househelps - Diary of a Lagos Househelp"
                 >
                     <i class="fa-solid fa-download fa-fade"></i>
                 </a>
@@ -604,6 +605,7 @@
                     class="btn btn-primary"
                     data-bs-toggle="modal"
                     data-bs-target="#staticBackdrop"
+                    data-title="Blank Cheque - What You See Sometimes is not What You Get"
                 >
                     <i class="fa-solid fa-download fa-fade"></i>
                 </a>
@@ -627,6 +629,7 @@
                     class="btn btn-primary"
                     data-bs-toggle="modal"
                     data-bs-target="#staticBackdrop"
+                    data-title="Royal Company - Inflow of the Palace"
                 >
                     <i class="fa-solid fa-download fa-fade"></i>
                 </a>
@@ -650,6 +653,7 @@
                     class="btn btn-primary"
                     data-bs-toggle="modal"
                     data-bs-target="#staticBackdrop"
+                    data-title="Tunde and Ajoke - Wealth or Heart, What Would it Be?"
                 >
                     <i class="fa-solid fa-download fa-fade"></i>
                 </a>
@@ -673,6 +677,7 @@
                     class="btn btn-primary"
                     data-bs-toggle="modal"
                     data-bs-target="#staticBackdrop"
+                    data-title="Heart Budget"
                 >
                     <i class="fa-solid fa-download fa-fade"></i>
                 </a>
@@ -696,6 +701,7 @@
                     class="btn btn-primary"
                     data-bs-toggle="modal"
                     data-bs-target="#staticBackdrop"
+                    data-title="Streets of Heaven"
                 >
                     <i class="fa-solid fa-download fa-fade"></i>
                 </a>
@@ -719,6 +725,7 @@
                     class="btn btn-primary"
                     data-bs-toggle="modal"
                     data-bs-target="#staticBackdrop"
+                    data-title="A Life For A Life"
                 >
                     <i class="fa-solid fa-download fa-fade"></i>
                 </a>
@@ -742,6 +749,7 @@
                     class="btn btn-primary"
                     data-bs-toggle="modal"
                     data-bs-target="#staticBackdrop"
+                    data-title="Golden Offer"
                 >
                     <i class="fa-solid fa-download fa-fade"></i>
                 </a>
@@ -765,6 +773,7 @@
                     class="btn btn-primary"
                     data-bs-toggle="modal"
                     data-bs-target="#staticBackdrop"
+                    data-title="Bare to Beauty"
                 >
                     <i class="fa-solid fa-download fa-fade"></i>
                 </a>
@@ -773,7 +782,7 @@
                 </a>
             </div>
         </div>
-        
+
         <div id="loader">
             <div
                 class="spinner-grow text-secondary"
@@ -806,7 +815,9 @@
                             aria-label="Close"
                         ></button>
                     </div>
-                    <div class="modal-body download_m-b">...</div>
+                    <div class="modal-body download_m-b" id="downloadModalBody">
+                        ...
+                    </div>
                     <div class="modal-footer download_m-f">
                         <button
                             type="button"
@@ -1112,6 +1123,30 @@
             });
 
             navbarCloseBtn.addEventListener("click", () => bsCollapse.hide());
+        </script>
+
+        <script>
+            const downloadModal = document.getElementById("staticBackdrop");
+
+            downloadModal.addEventListener("show.bs.modal", function (event) {
+                const triggerBtn = event.relatedTarget; // the element that triggered the modal
+                const videoTitle = triggerBtn.getAttribute("data-title"); // get custom title
+
+                // Update modal title (optional)
+                //const modalTitle = downloadModal.querySelector(
+                //  "#staticBackdropLabel"
+                //  );
+                //if (modalTitle) {
+                //  modalTitle.textContent = `Download "${videoTitle}"?`;
+                //}
+
+                // Update modal body (optional)
+                const modalBody =
+                    downloadModal.querySelector("#downloadModalBody");
+                if (modalBody) {
+                    modalBody.textContent = `You're about to download "${videoTitle}". Are you sure?`;
+                }
+            });
         </script>
     </body>
 </html>
