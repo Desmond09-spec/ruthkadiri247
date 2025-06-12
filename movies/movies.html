@@ -170,35 +170,34 @@
             }
 
             #loader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1050;
-}
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100vw;
+                height: 100vh;
+                background: rgba(0, 0, 0, 0.5);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 1050;
+            }
 
-.loader-content {
-    text-align: center;
-    color: white;
-}
+            .loader-content {
+                text-align: center;
+                color: white;
+            }
 
-.loader-message {
-    margin-top: 1rem;
-    font-size: 1.1rem;
-    font-weight: 600;
-}
+            .loader-message {
+                margin-top: 1rem;
+                font-size: 1.1rem;
+                font-weight: 600;
+            }
 
-.loader-subtext {
-    margin-top: 0.5rem;
-    font-size: 0.95rem;
-    opacity: 0.75;
-}
-
+            .loader-subtext {
+                margin-top: 0.5rem;
+                font-size: 0.95rem;
+                opacity: 0.75;
+            }
 
             .blurred {
                 filter: blur(5px);
@@ -243,7 +242,7 @@
                 background: white;
             }
 
-            .details {
+            .bookmark {
                 position: absolute;
                 top: 50%;
                 right: 0.5rem; /* 2rem spacing from the right */
@@ -263,7 +262,7 @@
                 cursor: pointer;
             }
 
-            .details:hover {
+            .bookmark:hover {
                 color: rgba(33, 37, 41, 0.8);
                 background: white;
             }
@@ -484,6 +483,38 @@
                 transform: translateY(-20px);
                 pointer-events: auto;
             }
+
+            #more-features {
+                position: fixed;
+                bottom: 1.5rem;
+                left: 1rem;
+                right: 1rem;
+                margin: 0 auto;
+                max-width: 245px;
+                background-color: white;
+                color: #212529;
+                padding: 0.75rem 1.25rem;
+                border-radius: 1rem;
+                font-size: 0.95rem;
+                line-height: 1.4;
+                text-align: center;
+                word-wrap: break-word;
+
+                opacity: 0;
+                pointer-events: none;
+                transition:
+                    opacity 0.4s ease,
+                    transform 0.4s ease;
+
+                /* 👇 Super high priority */
+                z-index: 2147483647;
+            }
+
+            #more-features.show {
+                opacity: 1;
+                transform: translateY(-20px);
+                pointer-events: auto;
+            }
         </style>
     </head>
     <body>
@@ -515,18 +546,42 @@
                     <div class="collapse navbar-collapse" id="navbarMenu">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link active" href="#">Latest</a>
+                                <a
+                                    class="nav-link nav-filter active"
+                                    href="#"
+                                    id="latestBtn"
+                                    >Latest</a
+                                >
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Popular</a>
+                                <a
+                                    class="nav-link nav-filter"
+                                    href="#"
+                                    id="popularBtn"
+                                    >Popular</a
+                                >
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Oldest</a>
+                                <a
+                                    class="nav-link nav-filter"
+                                    href="#"
+                                    id="oldestBtn"
+                                    >Oldest</a
+                                >
+                            </li>
+
+                            <li class="nav-item">
+                                <a
+                                    class="nav-link"
+                                    href="#"
+                                    onclick="showMoreFeatures()"
+                                    >Bookmarks (Coming Soon!)</a
+                                >
                             </li>
 
                             <li class="nav-item">
                                 <a class="nav-link" href="#" id="hide-icons"
-                                    >Hide Download and Details icons</a
+                                    >Hide movie icons</a
                                 >
                             </li>
 
@@ -560,7 +615,12 @@
 
             <!-- Embedded YouTube Videos -->
 
-            <div class="video-wrapper" id="bolaji-and-the-mans-wife">
+            <div
+                class="video-wrapper"
+                id="bolaji-and-the-mans-wife"
+                data-date="2025-06-05"
+                data-views="1991433"
+            >
                 <iframe
                     src="https://youtube.com/embed/TDP76lfpmP8"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -580,12 +640,19 @@
                     <i class="fa-solid fa-download fa-fade"></i>
                 </a>
 
-                <a>
-                    <i class="fa fa-info-circle details" aria-hidden="true"></i>
+                <a onclick="showMoreFeatures()">
+                    <i
+                        class="fa-regular fa-bookmark bookmark"
+                        aria-hidden="true"
+                    ></i>
                 </a>
             </div>
 
-            <div class="video-wrapper">
+            <div
+                class="video-wrapper"
+                data-date="2025-05-22"
+                data-views="3716408"
+            >
                 <iframe
                     src="https://www.youtube.com/embed/zpxA2YAP68Q"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -605,12 +672,19 @@
                 >
                     <i class="fa-solid fa-download fa-fade"></i>
                 </a>
-                <a>
-                    <i class="fa fa-info-circle details" aria-hidden="true"></i>
+                <a onclick="showMoreFeatures()">
+                    <i
+                        class="fa-regular fa-bookmark bookmark"
+                        aria-hidden="true"
+                    ></i>
                 </a>
             </div>
 
-            <div class="video-wrapper">
+            <div
+                class="video-wrapper"
+                data-date="2025-05-15"
+                data-views="1940897"
+            >
                 <iframe
                     src="https://www.youtube.com/embed/mbbcOrR_lU8"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -630,12 +704,19 @@
                 >
                     <i class="fa-solid fa-download fa-fade"></i>
                 </a>
-                <a>
-                    <i class="fa fa-info-circle details" aria-hidden="true"></i>
+                <a onclick="showMoreFeatures()">
+                    <i
+                        class="fa-regular fa-bookmark bookmark"
+                        aria-hidden="true"
+                    ></i>
                 </a>
             </div>
 
-            <div class="video-wrapper">
+            <div
+                class="video-wrapper"
+                data-date="2025-05-08"
+                data-views="2666371"
+            >
                 <iframe
                     src="https://www.youtube.com/embed/4KPvYzHsL2k"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -655,12 +736,19 @@
                 >
                     <i class="fa-solid fa-download fa-fade"></i>
                 </a>
-                <a>
-                    <i class="fa fa-info-circle details" aria-hidden="true"></i>
+                <a onclick="showMoreFeatures()">
+                    <i
+                        class="fa-regular fa-bookmark bookmark"
+                        aria-hidden="true"
+                    ></i>
                 </a>
             </div>
 
-            <div class="video-wrapper">
+            <div
+                class="video-wrapper"
+                data-date="2025-05-01"
+                data-views="3222143"
+            >
                 <iframe
                     src="https://www.youtube.com/embed/wBDl7HSGtUs"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -680,12 +768,19 @@
                 >
                     <i class="fa-solid fa-download fa-fade"></i>
                 </a>
-                <a>
-                    <i class="fa fa-info-circle details" aria-hidden="true"></i>
+                <a onclick="showMoreFeatures()">
+                    <i
+                        class="fa-regular fa-bookmark bookmark"
+                        aria-hidden="true"
+                    ></i>
                 </a>
             </div>
 
-            <div class="video-wrapper">
+            <div
+                class="video-wrapper"
+                data-date="2025-04-24"
+                data-views="2454201"
+            >
                 <iframe
                     src="https://www.youtube.com/embed/mqZ8CkGfWSI"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -705,12 +800,19 @@
                 >
                     <i class="fa-solid fa-download fa-fade"></i>
                 </a>
-                <a>
-                    <i class="fa fa-info-circle details" aria-hidden="true"></i>
+                <a onclick="showMoreFeatures()">
+                    <i
+                        class="fa-regular fa-bookmark bookmark"
+                        aria-hidden="true"
+                    ></i>
                 </a>
             </div>
 
-            <div class="video-wrapper">
+            <div
+                class="video-wrapper"
+                data-date="2025-04-10"
+                data-views="2386648"
+            >
                 <iframe
                     src="https://www.youtube.com/embed/aI61T_6dWo0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -730,12 +832,19 @@
                 >
                     <i class="fa-solid fa-download fa-fade"></i>
                 </a>
-                <a>
-                    <i class="fa fa-info-circle details" aria-hidden="true"></i>
+                <a onclick="showMoreFeatures()">
+                    <i
+                        class="fa-regular fa-bookmark bookmark"
+                        aria-hidden="true"
+                    ></i>
                 </a>
             </div>
 
-            <div class="video-wrapper">
+            <div
+                class="video-wrapper"
+                data-date="2025-04-03"
+                data-views="1894682"
+            >
                 <iframe
                     src="https://www.youtube.com/embed/t8_y-SPTmXE"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -755,12 +864,19 @@
                 >
                     <i class="fa-solid fa-download fa-fade"></i>
                 </a>
-                <a>
-                    <i class="fa fa-info-circle details" aria-hidden="true"></i>
+                <a onclick="showMoreFeatures()">
+                    <i
+                        class="fa-regular fa-bookmark bookmark"
+                        aria-hidden="true"
+                    ></i>
                 </a>
             </div>
 
-            <div class="video-wrapper">
+            <div
+                class="video-wrapper"
+                data-date="2025-03-27"
+                data-views="2790502"
+            >
                 <iframe
                     src="https://www.youtube.com/embed/uYfzddWciYU"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -780,12 +896,19 @@
                 >
                     <i class="fa-solid fa-download fa-fade"></i>
                 </a>
-                <a>
-                    <i class="fa fa-info-circle details" aria-hidden="true"></i>
+                <a onclick="showMoreFeatures()">
+                    <i
+                        class="fa-regular fa-bookmark bookmark"
+                        aria-hidden="true"
+                    ></i>
                 </a>
             </div>
 
-            <div class="video-wrapper">
+            <div
+                class="video-wrapper"
+                data-date="2025-03-13"
+                data-views="2267779"
+            >
                 <iframe
                     src="https://www.youtube.com/embed/a9_gUwklLSg"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -805,8 +928,11 @@
                 >
                     <i class="fa-solid fa-download fa-fade"></i>
                 </a>
-                <a>
-                    <i class="fa fa-info-circle details" aria-hidden="true"></i>
+                <a onclick="showMoreFeatures()">
+                    <i
+                        class="fa-regular fa-bookmark bookmark"
+                        aria-hidden="true"
+                    ></i>
                 </a>
             </div>
         </div>
@@ -949,13 +1075,13 @@
                             </li>
                             <br />
                             <li>
-                                Each movie will display a download icon on the
-                                left side and a details icon on the right, both
-                                positioned vertically in the middle. To download
-                                a movie, click its download icon. To view more
-                                information, click the details icon associated
-                                with that movie. The visibility of these icons
-                                can be managed from the menu bar.
+                                Each movie displays a download icon on the left
+                                and a bookmark icon on the right, both
+                                vertically centered. You can click the download
+                                icon to download a movie. The bookmark feature
+                                is not yet active, but will be available soon.
+                                The visibility of these icons can be managed
+                                from the menu bar.
                             </li>
                         </ul>
                     </div>
@@ -985,6 +1111,8 @@
             You may need to scroll down to see the menu title in the top-right
             corner.
         </div>
+
+        <div id="more-features">More features coming soon!</div>
 
         <!-- End of body -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -1040,6 +1168,22 @@
         </script>
 
         <script>
+            function showMoreFeatures() {
+                const moreFeatures = document.getElementById("more-features");
+
+                const toast1 = document.getElementById("screenshot-toast");
+
+                toast1.classList.remove("show");
+
+                moreFeatures.classList.add("show");
+
+                setTimeout(() => {
+                    moreFeatures.classList.remove("show");
+                }, 3000); // visible for 2.5 seconds
+            }
+        </script>
+
+        <script>
             window.addEventListener("load", function () {
                 const loader = document.getElementById("loader");
                 const container = document.querySelector(".container");
@@ -1061,34 +1205,99 @@
 
         <script>
             document.addEventListener("DOMContentLoaded", function () {
-                //      const navLinks = document.querySelectorAll(".nav-link");
-                const navLinks = Array.from(
-                    document.querySelectorAll(".nav-link")
-                ).slice(0, -2);
+                const videoContainer = document.querySelector(".container");
+                const allVideos = Array.from(
+                    document.querySelectorAll(".video-wrapper")
+                );
 
+                const filterLinks = document.querySelectorAll(
+                    ".nav-link.nav-filter"
+                );
                 const brand = document.getElementById("navbarTitle");
                 const navbarCollapse = document.getElementById("navbarMenu");
                 const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
-                    toggle: false // Prevent automatic toggle
+                    toggle: false
                 });
 
-                navLinks.forEach(link => {
+                function sortVideosByDate(desc = true) {
+                    return [...allVideos].sort((a, b) => {
+                        const dateA = new Date(a.dataset.date);
+                        const dateB = new Date(b.dataset.date);
+                        return desc ? dateB - dateA : dateA - dateB;
+                    });
+                }
+
+                function sortVideosByViews(desc = true) {
+                    return [...allVideos].sort((a, b) => {
+                        const viewsA = parseInt(a.dataset.views);
+                        const viewsB = parseInt(b.dataset.views);
+                        return desc ? viewsB - viewsA : viewsA - viewsB;
+                    });
+                }
+
+                function renderVideos(sortedList) {
+    const loader = document.getElementById("loader");
+    const container = document.querySelector(".container");
+
+    loader.style.display = "flex";
+    container.classList.add("blurred");
+
+    // Clear current videos
+    videoContainer.innerHTML = "";
+
+    // Append new videos and track loading of iframes
+    let iframesToLoad = 0;
+    let iframesLoaded = 0;
+
+    sortedList.forEach(video => {
+        const iframe = video.querySelector("iframe");
+        if (iframe) {
+            iframesToLoad++;
+
+            iframe.addEventListener("load", () => {
+                iframesLoaded++;
+                if (iframesLoaded === iframesToLoad) {
+                    loader.style.display = "none";
+                    container.classList.remove("blurred");
+                }
+            });
+        }
+
+        videoContainer.appendChild(video);
+    });
+
+    // Fallback if there are no iframes (or all already cached/loaded)
+    if (iframesToLoad === 0) {
+        loader.style.display = "none";
+        container.classList.remove("blurred");
+    }
+}
+ 
+
+                filterLinks.forEach(link => {
                     link.addEventListener("click", function (e) {
                         e.preventDefault();
 
-                        // Remove 'active' from all links
-                        navLinks.forEach(l => l.classList.remove("active"));
-
-                        // Add 'active' to the clicked link
+                        // Remove 'active' from all filter links
+                        filterLinks.forEach(l => l.classList.remove("active"));
                         this.classList.add("active");
 
-                        // Update the brand text
+                        // Update the brand title
                         brand.textContent = this.textContent.trim();
 
-                        // Collapse the navbar menu (on mobile)
+                        // Collapse the navbar on mobile
                         if (navbarCollapse.classList.contains("show")) {
                             bsCollapse.hide();
                         }
+
+                        // Determine sort type
+                        const id = this.id;
+                        if (id === "latestBtn")
+                            renderVideos(sortVideosByDate(true));
+                        if (id === "popularBtn")
+                            renderVideos(sortVideosByViews(true));
+                        if (id === "oldestBtn")
+                            renderVideos(sortVideosByDate(false));
                     });
                 });
             });
@@ -1147,7 +1356,7 @@
                 e.preventDefault();
 
                 const elements = document.querySelectorAll(
-                    ".download-wrapper, .details"
+                    ".download-wrapper, .bookmark"
                 );
                 const isCurrentlyHidden = Array.from(elements).every(
                     el =>
@@ -1160,10 +1369,10 @@
                 });
 
                 hideIcons.innerText = isCurrentlyHidden
-                    ? "Hide Download and Details icons"
-                    : "Show Download and Details icons";
+                    ? "Hide movie icons"
+                    : "Show movie icons";
 
-                bsCollapse.hide();
+                // bsCollapse.hide();
             });
 
             navbarCloseBtn.addEventListener("click", () => bsCollapse.hide());
@@ -1202,5 +1411,72 @@
                 }
             });
         </script>
+
+        <!-- <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const videoContainer = document.querySelector(".container");
+                const allVideos = Array.from(
+                    document.querySelectorAll(".video-wrapper")
+                );
+        
+                function sortVideosByDate(desc = true) {
+                    return [...allVideos].sort((a, b) => {
+                        const dateA = new Date(a.dataset.date);
+                        const dateB = new Date(b.dataset.date);
+                        return desc ? dateB - dateA : dateA - dateB;
+                    });
+                }
+        
+                function sortVideosByViews(desc = true) {
+                    return [...allVideos].sort((a, b) => {
+                        const viewsA = parseInt(a.dataset.views);
+                        const viewsB = parseInt(b.dataset.views);
+                        return desc ? viewsB - viewsA : viewsA - viewsB;
+                    });
+                }
+        
+                function renderVideos(sortedList) {
+                    const loader = document.getElementById("loader");
+                    const container = document.querySelector(".container");
+        
+                    loader.style.display = "flex";
+                    container.classList.add("blurred");
+        
+                    setTimeout(() => {
+                        videoContainer.innerHTML = "";
+                        sortedList.forEach(video =>
+                            videoContainer.appendChild(video)
+                        );
+                        loader.style.display = "none";
+                        container.classList.remove("blurred");
+                    }, 1000);
+                }
+        
+                const latestBtn = document.getElementById("latestBtn");
+                const popularBtn = document.getElementById("popularBtn");
+                const oldestBtn = document.getElementById("oldestBtn");
+        
+                if (latestBtn) {
+                    latestBtn.addEventListener("click", e => {
+                        e.preventDefault();
+                        renderVideos(sortVideosByDate(true));
+                    });
+                }
+        
+                if (popularBtn) {
+                    popularBtn.addEventListener("click", e => {
+                        e.preventDefault();
+                        renderVideos(sortVideosByViews(true));
+                    });
+                }
+        
+                if (oldestBtn) {
+                    oldestBtn.addEventListener("click", e => {
+                        e.preventDefault();
+                        renderVideos(sortVideosByDate(false));
+                    });
+                }
+            });
+        </script> -->
     </body>
 </html>
