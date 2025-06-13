@@ -69,6 +69,154 @@
             #scrollToTop:hover {
                 background: white;
             }
+
+            #message-sent {
+                position: fixed;
+                bottom: 1.5rem;
+                left: 0;
+                right: 0;
+                margin: 0 auto;
+
+                /* 👇 Core layout logic */
+
+                width: fit-content;
+                max-width: calc(100vw - 2rem); /* Gives padding on sides */
+
+                background-color: white;
+                color: #212529;
+                padding: 0.75rem 1.25rem;
+                border-radius: 1rem;
+                font-size: 0.95rem;
+                line-height: 1.4;
+                text-align: center;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+
+                opacity: 0;
+                pointer-events: none;
+                transition:
+                    opacity 0.4s ease,
+                    transform 0.4s ease;
+
+                z-index: 2147483647;
+            }
+
+            #message-sent.show {
+                opacity: 1;
+                transform: translateY(-20px);
+                pointer-events: auto;
+            }
+
+            #submit_error {
+                position: fixed;
+                bottom: 1.5rem;
+                left: 0;
+                right: 0;
+                margin: 0 auto;
+
+                /* 👇 Core layout logic */
+
+                width: fit-content;
+                max-width: calc(100vw - 2rem); /* Gives padding on sides */
+
+                background-color: white;
+                color: #212529;
+                padding: 0.75rem 1.25rem;
+                border-radius: 1rem;
+                font-size: 0.95rem;
+                line-height: 1.4;
+                text-align: center;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+
+                opacity: 0;
+                pointer-events: none;
+                transition:
+                    opacity 0.4s ease,
+                    transform 0.4s ease;
+
+                z-index: 2147483647;
+            }
+
+            #submit_error.show {
+                opacity: 1;
+                transform: translateY(-20px);
+                pointer-events: auto;
+            }
+
+            #submit_issue {
+                position: fixed;
+                bottom: 1.5rem;
+                left: 0;
+                right: 0;
+                margin: 0 auto;
+
+                /* 👇 Core layout logic */
+
+                width: fit-content;
+                max-width: calc(100vw - 2rem); /* Gives padding on sides */
+
+                background-color: white;
+                color: #212529;
+                padding: 0.75rem 1.25rem;
+                border-radius: 1rem;
+                font-size: 0.95rem;
+                line-height: 1.4;
+                text-align: center;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+
+                opacity: 0;
+                pointer-events: none;
+                transition:
+                    opacity 0.4s ease,
+                    transform 0.4s ease;
+
+                z-index: 2147483647;
+            }
+
+            #submit_issue.show {
+                opacity: 1;
+                transform: translateY(-20px);
+                pointer-events: auto;
+            }
+
+            #fill-in-all-fields {
+                position: fixed;
+                bottom: 1.5rem;
+                left: 0;
+                right: 0;
+                margin: 0 auto;
+
+                /* 👇 Core layout logic */
+
+                width: fit-content;
+                max-width: calc(100vw - 2rem); /* Gives padding on sides */
+
+                background-color: white;
+                color: #212529;
+                padding: 0.75rem 1.25rem;
+                border-radius: 1rem;
+                font-size: 0.95rem;
+                line-height: 1.4;
+                text-align: center;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+
+                opacity: 0;
+                pointer-events: none;
+                transition:
+                    opacity 0.4s ease,
+                    transform 0.4s ease;
+
+                z-index: 2147483647;
+            }
+
+            #fill-in-all-fields.show {
+                opacity: 1;
+                transform: translateY(-20px);
+                pointer-events: auto;
+            }
         </style>
     </head>
     <body class="is-preload">
@@ -123,7 +271,7 @@
                 <!-- One -->
                 <section id="one" class="wrapper spotlight style1">
                     <div class="inner">
-                        <a href="#" class="image"
+                        <a href="#one" class="image"
                             ><img src="images/ruth-kadiri.jpg" alt=""
                         /></a>
                         <div class="content">
@@ -139,7 +287,11 @@
                                 socially relevant stories that resonate with
                                 audiences worldwide.
                             </p>
-                            <a href="#" class="special">Learn more</a>
+                            <a
+                                href="https://en.m.wikipedia.org/wiki/Ruth_Kadiri"
+                                class="special"
+                                >Learn more</a
+                            >
                         </div>
                     </div>
                 </section>
@@ -147,7 +299,7 @@
                 <!-- Two -->
                 <section id="two" class="wrapper alt spotlight style2">
                     <div class="inner">
-                        <a href="#" class="image"
+                        <a href="#two" class="image"
                             ><img src="images/deza-the-great.jpeg" alt=""
                         /></a>
                         <div class="content">
@@ -168,7 +320,11 @@
                                 consistently bringing stories to life with
                                 authenticity and passion.
                             </p>
-                            <a href="#" class="special">Learn more</a>
+                            <a
+                                href="https://en.m.wikipedia.org/wiki/Deza_the_Great#:~:text=Adekanla%20Aderinola%20Desalu%20(born%207,and%20Unusual%20Arrangements%20(2023)."
+                                class="special"
+                                >Learn more</a
+                            >
                         </div>
                     </div>
                 </section>
@@ -176,7 +332,7 @@
                 <!-- Three -->
                 <section id="three" class="wrapper spotlight style3">
                     <div class="inner">
-                        <a href="#" class="image"
+                        <a href="#three" class="image"
                             ><img src="images/maurice-sam.jpg" alt=""
                         /></a>
                         <div class="content">
@@ -196,7 +352,11 @@
                                 cemented his place as a true legend in
                                 contemporary Nigerian cinema.
                             </p>
-                            <a href="#" class="special">Learn more</a>
+                            <a
+                                href="https://www1.wikilifeng.com/about/maurice-sam"
+                                class="special"
+                                >Learn more</a
+                            >
                         </div>
                     </div>
                 </section>
@@ -215,52 +375,62 @@
                         </p>
                         <section class="features">
                             <article>
-                                <a href="#" class="image"
+                                <a
+                                    href="images/better-half.jpeg"
+                                    target="_blank"
+                                    class="image"
                                     ><img src="images/better-half.jpeg" alt=""
                                 /></a>
                                 <h3 class="major">Better Half</h3>
                                 <p>
-                                    <strong>Better Half</strong> follows Kanye,
-                                    a university student who secretly pursues
-                                    his lecturer, Sia, by adopting another
-                                    identity. Starring Chidi Dike and
-                                    Uche Montana, this emotional tale of love
-                                    and rediscovery is full of surprises.
+                                    When a university student sets his sights on
+                                    his class teacher, his life never remains
+                                    the same as he vows to make her his wife.
                                 </p>
                                 <a href="#" class="special">Watch</a>
                             </article>
                             <article>
-                                <a href="#" class="image"
+                                <a
+                                    href="after-school.jpeg"
+                                    target="_blank"
+                                    class="image"
                                     ><img src="images/after-school.jpeg" alt=""
                                 /></a>
                                 <h3 class="major">After School</h3>
                                 <p>
-                                  <strong>After School</strong> centers on Ada, a diligent student navigating friendships, pressures, and newfound independence when she joins an after‑class club. Featuring Ada Ifeoma and Tosin Chukwu, it’s a heartfelt story about growth, belonging, and self‑discovery.</p>
-                                <a href="#" class="special">Watch</a>
-                            </article>
-                            <article>
-                                <a href="#" class="image"
-                                    ><img src="images/mannerless.jpeg" alt=""
-                                /></a>
-                                <h3 class="major">Mannerless</h3>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur
-                                    adipiscing vehicula id nulla dignissim
-                                    dapibus ultrices.
+                                    - Annabel Apara, Faith Stanley, Kelvin Ezike
+                                    (Kenzy).
                                 </p>
                                 <a href="#" class="special">Watch</a>
                             </article>
                             <article>
-                                <a href="#" class="image"
+                                <a
+                                    href="images/mannerless.jpeg"
+                                    target="_blank"
+                                    class="image"
+                                    ><img src="images/mannerless.jpeg" alt=""
+                                /></a>
+                                <h3 class="major">Mannerless</h3>
+                                <p>
+                                    A story about friendship, love, and
+                                    betrayal. Will we get the happy ending we
+                                    hope for?
+                                </p>
+                                <a href="#" class="special">Watch</a>
+                            </article>
+                            <article>
+                                <a
+                                    href="images/I-will-wait-for-you.jpeg"
+                                    target="_blank"
+                                    class="image"
                                     ><img
                                         src="images/I-will-wait-for-you.jpeg"
                                         alt=""
                                 /></a>
                                 <h3 class="major">Wait For You</h3>
                                 <p>
-                                    Lorem ipsum dolor sit amet, consectetur
-                                    adipiscing vehicula id nulla dignissim
-                                    dapibus ultrices.
+                                    - Chidi Dike and Genevieve Edwin take the
+                                    lead.
                                 </p>
                                 <a href="#" class="special">Watch</a>
                             </article>
@@ -281,13 +451,18 @@
                 <div class="inner">
                     <h2 class="major">Get in touch</h2>
                     <p>
-                        Cras mattis ante fermentum, malesuada neque vitae,
-                        eleifend erat. Phasellus non pulvinar erat. Fusce
-                        tincidunt, nisl eget mattis egestas, purus ipsum
-                        consequat orci, sit amet lobortis lorem lacus in tellus.
-                        Sed ac elementum arcu. Quisque placerat auctor laoreet.
+                        If you have any questions, need assistance, or would
+                        like to share suggestions for improving the movie and TV
+                        experience on our platform or the website itself, please
+                        don't hesitate to reach out. Your feedback is invaluable
+                        to us as we continue working to enhance your experience.
                     </p>
-                    <form method="post" action="#">
+
+                    <form
+                        id="contact-form"
+                        action="https://formspree.io/f/mgvykjel"
+                        method="POST"
+                    >
                         <div class="fields">
                             <div class="field">
                                 <label for="name">Name</label>
@@ -313,30 +488,37 @@
                         </ul>
                     </form>
                     <ul class="contact">
-                        <li class="icon solid fa-home">
-                            Untitled Inc<br />
-                            1234 Somewhere Road Suite #2894<br />
-                            Nashville, TN 00000-0000
+                        <li class="icon solid fa-home">Lagos, Nigeria</li>
+                        <li class="icon solid fa-phone">
+                            <a href="tel:+2349161735844">(234) 916-173-5844</a>
                         </li>
-                        <li class="icon solid fa-phone">(000) 000-0000</li>
                         <li class="icon solid fa-envelope">
-                            <a href="#">information@untitled.tld</a>
+                            <a href="mailto:ruthkadiri247@gmail.com"
+                                >ruthkadiri247@gmail.com</a
+                            >
                         </li>
-                        <li class="icon brands fa-twitter">
-                            <a href="#">twitter.com/untitled-tld</a>
-                        </li>
-                        <li class="icon brands fa-facebook-f">
-                            <a href="#">facebook.com/untitled-tld</a>
-                        </li>
-                        <li class="icon brands fa-instagram">
-                            <a href="#">instagram.com/untitled-tld</a>
-                        </li>
+
+                        <!--  <li class="icon brands fa-twitter">
+                           <a href="https://x.com/ruthkadiri247"
+                               >Twitter (RuthKadiri247)</a
+                           >
+                       </li>
+                       <li class="icon brands fa-facebook-f">
+                           <a href="#">Facebook (RuthKadiri247)</a>
+                       </li>
+                       <li class="icon brands fa-instagram">
+                           <a href="#">Instagram (RuthKadiri247)</a>
+                       </li> -->
                     </ul>
+
                     <ul class="copyright">
-                        <li>&copy; Untitled Inc. All rights reserved.</li>
                         <li>
-                            Design: <a href="http://html5up.net">HTML5 UP</a>
+                            Copyright &copy; RuthKadiri247. All rights reserved.
                         </li>
+
+                        <!-- <li>
+                            Design: <a href="http://html5up.net">HTML5 UP</a>
+                        </li> -->
                     </ul>
                 </div>
             </section>
@@ -346,6 +528,16 @@
         <button id="scrollToTop" title="Go to top">
             <i class="fas fa-arrow-up arrow--up"></i>
         </button>
+
+        <div id="message-sent">Your message has been sent.</div>
+
+        <div id="fill-in-all-fields">
+            Please fill in all fields before submitting.
+        </div>
+
+        <div id="submit_issue">There was an issue submitting the form.</div>
+
+        <div id="submit_error">An error occurred. Please try again later.</div>
 
         <!-- Scripts -->
         <script src="assets/js/jquery.min.js"></script>
@@ -373,6 +565,100 @@
             // Scroll to top on click
             scrollBtn.addEventListener("click", () => {
                 window.scrollTo({ top: 0, behavior: "smooth" });
+            });
+        </script>
+
+        <script>
+            function messageSent() {
+                const messageSentT = document.getElementById("message-sent");
+
+                messageSentT.classList.add("show");
+
+                setTimeout(() => {
+                    messageSentT.classList.remove("show");
+                }, 6000); // visible for 2.5 seconds
+            }
+        </script>
+
+        <script>
+            function submitIssue() {
+                const submitIssueT = document.getElementById("submit_issue");
+
+                const toast1 = document.getElementById("screenshot-toast");
+
+                toast1.classList.remove("show");
+
+                submitIssueT.classList.add("show");
+
+                setTimeout(() => {
+                    submitIssueT.classList.remove("show");
+                }, 3000); // visible for 2.5 seconds
+            }
+        </script>
+
+        <script>
+            function submitError() {
+                const submitErrorT = document.getElementById("submit_error");
+
+                const toast1 = document.getElementById("screenshot-toast");
+
+                toast1.classList.remove("show");
+
+                submitErrorT.classList.add("show");
+
+                setTimeout(() => {
+                    submitErrorT.classList.remove("show");
+                }, 3000); // visible for 2.5 seconds
+            }
+        </script>
+
+        <script>
+            function fillInAllFields() {
+                const fillInAllFieldsT =
+                    document.getElementById("fill-in-all-fields");
+
+                fillInAllFieldsT.classList.add("show");
+
+                setTimeout(() => {
+                    fillInAllFieldsT.classList.remove("show");
+                }, 3000); // visible for 2.5 seconds
+            }
+        </script>
+
+        <script>
+            const form = document.getElementById("contact-form");
+            form.addEventListener("submit", async e => {
+                e.preventDefault();
+
+                const name = document.getElementById("name").value.trim();
+                const email = document.getElementById("email").value.trim();
+                const message = document.getElementById("message").value.trim();
+
+                if (!name || !email || !message) {
+                    fillInAllFields();
+                    return;
+                }
+
+                try {
+                    const response = await fetch(
+                        "https://formspree.io/f/mgvykjel",
+                        {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ name, email, message })
+                        }
+                    );
+
+                    if (response.ok) {
+                        messageSent();
+                        form.reset();
+                    } else {
+                        submitIssue();
+                    }
+                } catch (err) {
+                    console.error("Submission error:", err);
+                    submitError();
+                }
             });
         </script>
     </body>

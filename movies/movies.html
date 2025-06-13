@@ -53,7 +53,10 @@
             }
 
             .container {
-                padding: 2rem; /* top, right, bottom, left */
+                padding-top: 6rem; /* create space for fixed navbar */
+                padding-right: 2rem;
+                padding-bottom: 2rem;
+                padding-left: 2rem;
                 max-width: 1000px;
                 margin: 0 auto;
             }
@@ -88,7 +91,10 @@
                     font-size: 1.8rem;
                 }
                 .container {
-                    padding: 6rem 1rem 1rem 1rem; /* Keep top padding for navbar spacing */
+                    padding-top: 6.5rem;
+                    padding-right: 1rem;
+                    padding-bottom: 1rem;
+                    padding-left: 1rem;
                 }
             }
 
@@ -455,10 +461,15 @@
             #screenshot-toast {
                 position: fixed;
                 bottom: 1.5rem;
-                left: 1rem;
-                right: 1rem;
+                left: 0;
+                right: 0;
                 margin: 0 auto;
-                max-width: 528px;
+
+                /* 👇 Core layout logic */
+
+                width: fit-content;
+                max-width: calc(100vw - 2rem); /* Gives padding on sides */
+
                 background-color: white;
                 color: #212529;
                 padding: 0.75rem 1.25rem;
@@ -467,6 +478,7 @@
                 line-height: 1.4;
                 text-align: center;
                 word-wrap: break-word;
+                overflow-wrap: break-word;
 
                 opacity: 0;
                 pointer-events: none;
@@ -474,7 +486,6 @@
                     opacity 0.4s ease,
                     transform 0.4s ease;
 
-                /* 👇 Super high priority */
                 z-index: 2147483647;
             }
 
@@ -487,10 +498,15 @@
             #more-features {
                 position: fixed;
                 bottom: 1.5rem;
-                left: 1rem;
-                right: 1rem;
+                left: 0;
+                right: 0;
                 margin: 0 auto;
-                max-width: 245px;
+
+                /* 👇 Core layout logic */
+
+                width: fit-content;
+                max-width: calc(100vw - 2rem); /* Gives padding on sides */
+
                 background-color: white;
                 color: #212529;
                 padding: 0.75rem 1.25rem;
@@ -499,6 +515,7 @@
                 line-height: 1.4;
                 text-align: center;
                 word-wrap: break-word;
+                overflow-wrap: break-word;
 
                 opacity: 0;
                 pointer-events: none;
@@ -506,7 +523,6 @@
                     opacity 0.4s ease,
                     transform 0.4s ease;
 
-                /* 👇 Super high priority */
                 z-index: 2147483647;
             }
 
@@ -515,89 +531,200 @@
                 transform: translateY(-20px);
                 pointer-events: auto;
             }
+
+            #couldnt-find {
+                position: fixed;
+                bottom: 1.5rem;
+                left: 0;
+                right: 0;
+                margin: 0 auto;
+
+                /* 👇 Core layout logic */
+
+                width: fit-content;
+                max-width: calc(100vw - 2rem); /* Gives padding on sides */
+
+                background-color: white;
+                color: #212529;
+                padding: 0.75rem 1.25rem;
+                border-radius: 1rem;
+                font-size: 0.95rem;
+                line-height: 1.4;
+                text-align: center;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+
+                opacity: 0;
+                pointer-events: none;
+                transition:
+                    opacity 0.4s ease,
+                    transform 0.4s ease;
+
+                z-index: 2147483647;
+            }
+
+            #couldnt-find.show {
+                opacity: 1;
+                transform: translateY(-20px);
+                pointer-events: auto;
+            }
+
+            .top-menu {
+                position: fixed;
+                top: 2rem;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 90%;
+                background: linear-gradient(
+                    to bottom,
+                    rgba(33, 37, 41, 0.7),
+                    rgba(33, 37, 41, 0.7)
+                );
+                backdrop-filter: blur(6px);
+                border: 0.5px solid white;
+                border-radius: 15px;
+                z-index: 999;
+                padding: 0.5rem 1rem;
+            }
+
+            .top-menu .navbar-toggler-icon {
+                background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+            }
+
+            /* Dropdown background and appearance */
+            .custom-dropdown {
+                background: linear-gradient(
+                    to bottom,
+                    rgba(50, 54, 58, 0.95),
+                    rgba(30, 34, 38, 0.95)
+                ); /* subtle gradient from top to bottom */
+                backdrop-filter: blur(6px);
+                -webkit-backdrop-filter: blur(6px); /* For Safari support */
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                border-radius: 8px;
+                padding: 0.5rem 0;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            }
+
+            /* Ensure dropdown text is white */
+            .custom-dropdown .dropdown-item {
+                color: #fff; /* default text color */
+                background-color: transparent; /* prevent Bootstrap override */
+                transition:
+                    background-color 0.2s ease,
+                    color 0.2s ease;
+            }
+
+            .custom-dropdown .dropdown-item:hover {
+                background-color: rgba(255, 255, 255, 0.1);
+                color: #fff;
+            }
+
+            .bookmark_coming-soon_muted {
+                color: rgba(255, 255, 255, 0.6);
+            }
+
+            .bookmark_coming-soon_muted:hover {
+                color: rgba(255, 255, 255, 0.85);
+            }
         </style>
     </head>
     <body>
-        <div class="top-bar">
-            <a class="home-icon-wrapper" href="../index.html"
-                ><i class="fas fa-home"></i>
-            </a>
+        <!-- Modern Responsive Navbar -->
+        <nav class="navbar navbar-expand-lg top-menu">
+            <a class="navbar-brand text-white" href="#">Menu</a>
+            <button
+                class="navbar-toggler text-white border-white"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-            <nav class="navbar navbar-dark custom-navbar">
-                <div
-                    class="container-fluid d-flex justify-content-between align-items-center"
-                >
-                    <a class="navbar-brand" href="#" id="navbarTitle">Latest</a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="../index.html"
+                            >Home</a
+                        >
+                    </li>
 
-                    <!-- Hamburger Button -->
-                    <button
-                        class="navbar-toggler"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#navbarMenu"
-                        aria-controls="navbarMenu"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation"
-                    >
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-
-                    <!-- Collapsible Menu -->
-                    <div class="collapse navbar-collapse" id="navbarMenu">
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
+                    <li class="nav-item dropdown sort-by_dropdown">
+                        <a
+                            class="nav-link dropdown-toggle text-white"
+                            href="#"
+                            id="navbarDropdown"
+                            role="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                        >
+                            Sort by
+                        </a>
+                        <ul
+                            class="dropdown-menu custom-dropdown"
+                            aria-labelledby="navbarDropdown"
+                        >
+                            <li>
                                 <a
-                                    class="nav-link nav-filter active"
+                                    class="dropdown-item text-white sort-option"
                                     href="#"
-                                    id="latestBtn"
+                                    data-sort="latest"
                                     >Latest</a
                                 >
                             </li>
-                            <li class="nav-item">
+                            <li>
                                 <a
-                                    class="nav-link nav-filter"
+                                    class="dropdown-item text-white sort-option"
                                     href="#"
-                                    id="popularBtn"
+                                    data-sort="popular"
                                     >Popular</a
                                 >
                             </li>
-                            <li class="nav-item">
+                            <li>
                                 <a
-                                    class="nav-link nav-filter"
+                                    class="dropdown-item text-white sort-option"
                                     href="#"
-                                    id="oldestBtn"
+                                    data-sort="oldest"
                                     >Oldest</a
                                 >
                             </li>
-
-                            <li class="nav-item">
-                                <a
-                                    class="nav-link"
-                                    href="#"
-                                    onclick="showMoreFeatures()"
-                                    >Bookmarks (Coming Soon!)</a
-                                >
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link" href="#" id="hide-icons"
-                                    >Hide movie icons</a
-                                >
-                            </li>
-
-                            <li class="nav-item ms-auto">
-                                <a
-                                    class="nav-link nav-close-btn"
-                                    href="#"
-                                    id="nav-close"
-                                    >Close</a
-                                >
-                            </li>
                         </ul>
-                    </div>
-                </div>
-            </nav>
-        </div>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#" id="hide-icons"
+                            >Hide movie icons</a
+                        >
+                    </li>
+                    <li class="nav-item">
+                        <a
+                            class="nav-link bookmark_coming-soon_muted"
+                            href="#"
+                            onclick="showMoreFeatures()"
+                            >Bookmarks (Coming Soon!)</a
+                        >
+                    </li>
+                </ul>
+
+                <form class="d-flex" id="searchForm">
+                    <input
+                        class="form-control me-2"
+                        type="search"
+                        placeholder="Search"
+                        aria-label="Search"
+                        id="searchInput"
+                    />
+                    <button class="btn btn-outline-light" type="submit">
+                        Search
+                    </button>
+                </form>
+            </div>
+        </nav>
+
         <!-- close top-bar -->
 
         <!-- Background Water Video -->
@@ -620,6 +747,7 @@
                 id="bolaji-and-the-mans-wife"
                 data-date="2025-06-05"
                 data-views="1991433"
+                data-title="Bolaji and the Man's Wife - Words Pierce Harder Than A Stab"
             >
                 <iframe
                     src="https://youtube.com/embed/TDP76lfpmP8"
@@ -652,6 +780,7 @@
                 class="video-wrapper"
                 data-date="2025-05-22"
                 data-views="3716408"
+                data-title="Expensive Househelps - Diary of a Lagos Househelp"
             >
                 <iframe
                     src="https://www.youtube.com/embed/zpxA2YAP68Q"
@@ -684,6 +813,7 @@
                 class="video-wrapper"
                 data-date="2025-05-15"
                 data-views="1940897"
+                data-title="Blank Cheque - What You See Sometimes is not What You Get"
             >
                 <iframe
                     src="https://www.youtube.com/embed/mbbcOrR_lU8"
@@ -716,6 +846,7 @@
                 class="video-wrapper"
                 data-date="2025-05-08"
                 data-views="2666371"
+                data-title="Royal Company - Inflow of the Palace"
             >
                 <iframe
                     src="https://www.youtube.com/embed/4KPvYzHsL2k"
@@ -748,6 +879,7 @@
                 class="video-wrapper"
                 data-date="2025-05-01"
                 data-views="3222143"
+                data-title="Tunde and Ajoke - Wealth or Heart, What Would it Be?"
             >
                 <iframe
                     src="https://www.youtube.com/embed/wBDl7HSGtUs"
@@ -780,6 +912,7 @@
                 class="video-wrapper"
                 data-date="2025-04-24"
                 data-views="2454201"
+                data-title="Heart Budget"
             >
                 <iframe
                     src="https://www.youtube.com/embed/mqZ8CkGfWSI"
@@ -812,6 +945,7 @@
                 class="video-wrapper"
                 data-date="2025-04-10"
                 data-views="2386648"
+                data-title="Streets of Heaven"
             >
                 <iframe
                     src="https://www.youtube.com/embed/aI61T_6dWo0"
@@ -844,6 +978,7 @@
                 class="video-wrapper"
                 data-date="2025-04-03"
                 data-views="1894682"
+                data-title="A Life For A Life"
             >
                 <iframe
                     src="https://www.youtube.com/embed/t8_y-SPTmXE"
@@ -876,6 +1011,7 @@
                 class="video-wrapper"
                 data-date="2025-03-27"
                 data-views="2790502"
+                data-title="Golden Offer"
             >
                 <iframe
                     src="https://www.youtube.com/embed/uYfzddWciYU"
@@ -908,6 +1044,7 @@
                 class="video-wrapper"
                 data-date="2025-03-13"
                 data-views="2267779"
+                data-title="Bare to Beauty"
             >
                 <iframe
                     src="https://www.youtube.com/embed/a9_gUwklLSg"
@@ -1114,8 +1251,9 @@
 
         <div id="more-features">More features coming soon!</div>
 
+        <div id="couldnt-find"></div>
+
         <!-- End of body -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
         <script>
             window.addEventListener("DOMContentLoaded", () => {
@@ -1184,6 +1322,25 @@
         </script>
 
         <script>
+            function showCouldntFind() {
+                const couldntFind = document.getElementById("couldnt-find");
+
+                const toast1 = document.getElementById("screenshot-toast");
+
+                const toast2 = document.getElementById("more-features");
+
+                toast1.classList.remove("show");
+                toast2.classList.remove("show");
+
+                couldntFind.classList.add("show");
+
+                setTimeout(() => {
+                    couldntFind.classList.remove("show");
+                }, 3000); // visible for 2.5 seconds
+            }
+        </script>
+
+        <script>
             window.addEventListener("load", function () {
                 const loader = document.getElementById("loader");
                 const container = document.querySelector(".container");
@@ -1209,12 +1366,11 @@
                 const allVideos = Array.from(
                     document.querySelectorAll(".video-wrapper")
                 );
+                const couldNotFind = document.getElementById("couldnt-find");
 
-                const filterLinks = document.querySelectorAll(
-                    ".nav-link.nav-filter"
+                const navbarCollapse = document.getElementById(
+                    "navbarSupportedContent"
                 );
-                const brand = document.getElementById("navbarTitle");
-                const navbarCollapse = document.getElementById("navbarMenu");
                 const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
                     toggle: false
                 });
@@ -1235,70 +1391,119 @@
                     });
                 }
 
-                function renderVideos(sortedList) {
+               function renderVideos(list) {
+    // 👇 Scroll to top before loader shows
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
     const loader = document.getElementById("loader");
     const container = document.querySelector(".container");
 
     loader.style.display = "flex";
     container.classList.add("blurred");
-
-    // Clear current videos
     videoContainer.innerHTML = "";
 
-    // Append new videos and track loading of iframes
-    let iframesToLoad = 0;
-    let iframesLoaded = 0;
+    let toLoad = 0;
+    let loaded = 0;
 
-    sortedList.forEach(video => {
+    list.forEach(video => {
         const iframe = video.querySelector("iframe");
         if (iframe) {
-            iframesToLoad++;
-
+            toLoad++;
             iframe.addEventListener("load", () => {
-                iframesLoaded++;
-                if (iframesLoaded === iframesToLoad) {
+                loaded++;
+                if (loaded === toLoad) {
                     loader.style.display = "none";
                     container.classList.remove("blurred");
                 }
             });
         }
-
         videoContainer.appendChild(video);
     });
 
-    // Fallback if there are no iframes (or all already cached/loaded)
-    if (iframesToLoad === 0) {
+    if (toLoad === 0) {
         loader.style.display = "none";
         container.classList.remove("blurred");
     }
 }
- 
+
+
+                const filterLinks = document.querySelectorAll(".sort-option");
 
                 filterLinks.forEach(link => {
                     link.addEventListener("click", function (e) {
                         e.preventDefault();
 
-                        // Remove 'active' from all filter links
-                        filterLinks.forEach(l => l.classList.remove("active"));
-                        this.classList.add("active");
+                        const sortType = this.dataset.sort;
 
-                        // Update the brand title
-                        brand.textContent = this.textContent.trim();
-
-                        // Collapse the navbar on mobile
+                        // Collapse navbar if open (optional UX cleanup)
                         if (navbarCollapse.classList.contains("show")) {
                             bsCollapse.hide();
                         }
 
-                        // Determine sort type
-                        const id = this.id;
-                        if (id === "latestBtn")
-                            renderVideos(sortVideosByDate(true));
-                        if (id === "popularBtn")
-                            renderVideos(sortVideosByViews(true));
-                        if (id === "oldestBtn")
-                            renderVideos(sortVideosByDate(false));
+                        switch (sortType) {
+                            case "latest":
+                                renderVideos(sortVideosByDate(true));
+                                break;
+                            case "popular":
+                                renderVideos(sortVideosByViews(true));
+                                break;
+                            case "oldest":
+                                renderVideos(sortVideosByDate(false));
+                                break;
+                        }
                     });
+                });
+
+                // SEARCH FUNCTIONALITY
+                document
+                    .getElementById("searchForm")
+                    .addEventListener("submit", function (e) {
+                        e.preventDefault();
+                        const query = document
+                            .getElementById("searchInput")
+                            .value.trim()
+                            .toLowerCase();
+                        if (!query) return;
+
+                        const results = allVideos.filter(video => {
+                            const name =
+                                video.dataset.title?.toLowerCase() || "";
+                            return name.includes(query);
+                        });
+
+                        if (results.length > 0) {
+                            bsCollapse.hide();
+                            renderVideos(results);
+                        } else {
+                            // alert(`Sorry, we couldn't find "${query}".`);
+
+                            const cnfQ = query;
+                            const couldntFindText = `Sorry, we couldn't find "${cnfQ}"`;
+                            couldNotFind.innerText = couldntFindText;
+                            showCouldntFind();
+                        }
+                    });
+
+                // HIDE ICONS TOGGLE
+                const hideIcons = document.getElementById("hide-icons");
+                hideIcons.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    const elements = document.querySelectorAll(
+                        ".download-wrapper, .bookmark"
+                    );
+                    const hidden = Array.from(elements).every(
+                        el =>
+                            el.style.display === "none" ||
+                            getComputedStyle(el).display === "none"
+                    );
+
+                    elements.forEach(el => {
+                        el.style.display = hidden ? "flex" : "none";
+                    });
+
+                    this.textContent = hidden
+                        ? "Hide movie icons"
+                        : "Show movie icons";
                 });
             });
         </script>
@@ -1339,8 +1544,6 @@
 
             window.addEventListener("DOMContentLoaded", updateNavbarTitleWidth);
         </script>
-
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
         <script>
             const hideIcons = document.getElementById("hide-icons");
@@ -1478,5 +1681,11 @@
                 }
             });
         </script> -->
+
+        <!-- Bootstrap JS Bundle (includes Popper) -->
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            defer
+        ></script>
     </body>
 </html>
