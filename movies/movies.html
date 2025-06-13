@@ -53,7 +53,7 @@
             }
 
             .container {
-                padding-top: 6rem; /* create space for fixed navbar */
+                padding-top: 7rem; /* create space for fixed navbar */
                 padding-right: 2rem;
                 padding-bottom: 2rem;
                 padding-left: 2rem;
@@ -84,18 +84,6 @@
                 width: 100%;
                 height: 100%;
                 border: none;
-            }
-
-            @media (max-width: 768px) {
-                h1 {
-                    font-size: 1.8rem;
-                }
-                .container {
-                    padding-top: 6.5rem;
-                    padding-right: 1rem;
-                    padding-bottom: 1rem;
-                    padding-left: 1rem;
-                }
             }
 
             /* New styles for home icon + navbar alignment */
@@ -572,9 +560,13 @@
             .top-menu {
                 position: fixed;
                 top: 2rem;
-                left: 50%;
-                transform: translateX(-50%);
-                width: 90%;
+                left: 2rem;
+                right: 2rem;
+                margin: 0 auto;
+                max-width: calc(
+                    1000px - 4rem
+                ); /* 1000px minus 2rem left + 2rem right */
+                width: calc(100% - 4rem); /* responsive fallback */
                 background: linear-gradient(
                     to bottom,
                     rgba(33, 37, 41, 0.7),
@@ -589,6 +581,22 @@
 
             .top-menu .navbar-toggler-icon {
                 background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+            }
+            
+            @media (max-width: 768px) {
+                .container {
+                    padding-top: 6.5rem;
+                    padding-right: 1rem;
+                    padding-bottom: 1rem;
+                    padding-left: 1rem;
+                }
+
+                .top-menu {
+                    left: 1rem;
+                    right: 1rem;
+                    width: calc(100% - 2rem);
+                    max-width: none; /* ✅ remove limit so it matches .container child */
+                }
             }
 
             /* Dropdown background and appearance */
@@ -1205,10 +1213,11 @@
                             </li>
                             <br />
                             <li>
-                                A menu bar will appear in the top-right corner
-                                of this page once this modal is dismissed. From
-                                there, you will be able to filter the movies by
-                                latest, most popular, or oldest.
+                                A menu bar will appear at the top of this page
+                                once this modal is dismissed. From there, you
+                                will be able to navigate to the homepage, filter
+                                the movies by latest, most popular, or oldest,
+                                and search through the movies.
                             </li>
                             <br />
                             <li>
@@ -1264,15 +1273,20 @@
                     myModal.show();
                 }
 
+                // document.getElementById("welcome-nav-close-btn").addEventListener("click", () => showToast());
+
                 document
                     .getElementById("welcome-nav-close-btn")
-                    .addEventListener("click", () => showToast());
+                    .addEventListener("click", () => {
+                        localStorage.setItem("hideMoviesModal", "true");
+                        // showToast()
+                    });
 
                 document
                     .getElementById("dontShowAgainBtn")
                     .addEventListener("click", () => {
                         localStorage.setItem("hideMoviesModal", "true");
-                        showToast();
+                        // showToast()
                     });
             });
         </script>
@@ -1391,41 +1405,40 @@
                     });
                 }
 
-               function renderVideos(list) {
-    // 👇 Scroll to top before loader shows
-    window.scrollTo({ top: 0, behavior: "smooth" });
+                function renderVideos(list) {
+                    // 👇 Scroll to top before loader shows
+                    window.scrollTo({ top: 0, behavior: "smooth" });
 
-    const loader = document.getElementById("loader");
-    const container = document.querySelector(".container");
+                    const loader = document.getElementById("loader");
+                    const container = document.querySelector(".container");
 
-    loader.style.display = "flex";
-    container.classList.add("blurred");
-    videoContainer.innerHTML = "";
+                    loader.style.display = "flex";
+                    container.classList.add("blurred");
+                    videoContainer.innerHTML = "";
 
-    let toLoad = 0;
-    let loaded = 0;
+                    let toLoad = 0;
+                    let loaded = 0;
 
-    list.forEach(video => {
-        const iframe = video.querySelector("iframe");
-        if (iframe) {
-            toLoad++;
-            iframe.addEventListener("load", () => {
-                loaded++;
-                if (loaded === toLoad) {
-                    loader.style.display = "none";
-                    container.classList.remove("blurred");
+                    list.forEach(video => {
+                        const iframe = video.querySelector("iframe");
+                        if (iframe) {
+                            toLoad++;
+                            iframe.addEventListener("load", () => {
+                                loaded++;
+                                if (loaded === toLoad) {
+                                    loader.style.display = "none";
+                                    container.classList.remove("blurred");
+                                }
+                            });
+                        }
+                        videoContainer.appendChild(video);
+                    });
+
+                    if (toLoad === 0) {
+                        loader.style.display = "none";
+                        container.classList.remove("blurred");
+                    }
                 }
-            });
-        }
-        videoContainer.appendChild(video);
-    });
-
-    if (toLoad === 0) {
-        loader.style.display = "none";
-        container.classList.remove("blurred");
-    }
-}
-
 
                 const filterLinks = document.querySelectorAll(".sort-option");
 
