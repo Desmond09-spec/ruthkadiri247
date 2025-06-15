@@ -1974,6 +1974,7 @@
                             document.getElementById("more-features").innerHTML =
                                 "Search input cannot be empty";
                             showMoreFeatures();
+                            return
                         }
 
                         const results = allVideos.filter(video => {
