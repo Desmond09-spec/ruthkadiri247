@@ -616,7 +616,7 @@
 
             /* Ensure dropdown text is white */
             .custom-dropdown .dropdown-item {
-                color: #fff; /* default text color */
+                /*  color: #fff; */ /* default text color */
                 background-color: transparent; /* prevent Bootstrap override */
                 transition:
                     background-color 0.2s ease,
@@ -625,7 +625,7 @@
 
             .custom-dropdown .dropdown-item:hover {
                 background-color: rgba(255, 255, 255, 0.1);
-                color: #fff;
+                /* color: #fff; */
             }
 
             .bookmark_coming-soon_muted {
@@ -635,12 +635,29 @@
             .bookmark_coming-soon_muted:hover {
                 color: rgba(255, 255, 255, 0.85);
             }
+
+            #sort-latest {
+                color: #add8e6;
+            }
+
+            #sort-popular {
+                color: white;
+            }
+
+            #sort-oldest {
+                color: white;
+            }
         </style>
     </head>
     <body>
         <!-- Modern Responsive Navbar -->
         <nav class="navbar navbar-expand-lg top-menu">
-            <a class="navbar-brand text-white" href="#">Menu</a>
+            <a
+                class="navbar-brand text-white"
+                href="#"
+                id="menu_add-filter-option"
+                >Latest</a
+            >
             <button
                 class="navbar-toggler text-white border-white"
                 type="button"
@@ -678,25 +695,28 @@
                         >
                             <li>
                                 <a
-                                    class="dropdown-item text-white sort-option"
+                                    class="dropdown-item sort-option"
                                     href="#"
                                     data-sort="latest"
+                                    id="sort-latest"
                                     >Latest</a
                                 >
                             </li>
                             <li>
                                 <a
-                                    class="dropdown-item text-white sort-option"
+                                    class="dropdown-item sort-option"
                                     href="#"
                                     data-sort="popular"
+                                    id="sort-popular"
                                     >Popular</a
                                 >
                             </li>
                             <li>
                                 <a
-                                    class="dropdown-item text-white sort-option"
+                                    class="dropdown-item sort-option"
                                     href="#"
                                     data-sort="oldest"
+                                    id="sort-oldest"
                                     >Oldest</a
                                 >
                             </li>
@@ -1469,7 +1489,7 @@
                     ></i>
                 </a>
             </div>
-            
+
             <!-- 21 -->
             <!-- -------------------------------------- -->
 
@@ -1646,6 +1666,10 @@
                                 the movies by latest, most popular, or oldest,
                                 and search through the movies. However, for now,
                                 you may only search for a movie using its name.
+
+                                <em
+                                    >Note: The menu bar title reflects the active filter. The 'Latest' filter is applied by default each time the page loads.</em
+                                >
                             </li>
                             <br />
                             <li>
@@ -1813,6 +1837,14 @@
                 const navbarCollapse = document.getElementById(
                     "navbarSupportedContent"
                 );
+
+                const latestFilterBtn = document.getElementById("sort-latest");
+
+                const popularFilterBtn =
+                    document.getElementById("sort-popular");
+
+                const oldestFilterBtn = document.getElementById("sort-oldest");
+
                 const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
                     toggle: false
                 });
@@ -1884,12 +1916,43 @@
                         switch (sortType) {
                             case "latest":
                                 renderVideos(sortVideosByDate(true));
+
+                                document.getElementById(
+                                    "menu_add-filter-option"
+                                ).innerText = "Latest";
+
+                                latestFilterBtn.style.color = "#add8e6";
+
+                                popularFilterBtn.style.color = "white";
+
+                                oldestFilterBtn.style.color = "white";
                                 break;
+
                             case "popular":
                                 renderVideos(sortVideosByViews(true));
+
+                                document.getElementById(
+                                    "menu_add-filter-option"
+                                ).innerText = "Popular";
+
+                                popularFilterBtn.style.color = "#add8e6";
+                                latestFilterBtn.style.color = "white";
+
+                                oldestFilterBtn.style.color = "white";
                                 break;
+
                             case "oldest":
                                 renderVideos(sortVideosByDate(false));
+
+                                document.getElementById(
+                                    "menu_add-filter-option"
+                                ).innerText = "Oldest";
+
+                                oldestFilterBtn.style.color = "#add8e6";
+
+                                latestFilterBtn.style.color = "white";
+
+                                popularFilterBtn.style.color = "white";
                                 break;
                         }
                     });
