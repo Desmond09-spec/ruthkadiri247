@@ -1974,7 +1974,7 @@
                             document.getElementById("more-features").innerHTML =
                                 "Search input cannot be empty.";
                             showMoreFeatures();
-                            return
+                            return;
                         }
 
                         const results = allVideos.filter(video => {
@@ -1984,7 +1984,14 @@
                         });
 
                         if (results.length > 0) {
+                          
+                          document.getElementById(
+                                "menu_add-filter-option"
+                            ).innerText = "Search";
+                            
                             bsCollapse.hide();
+
+                            
 
                             latestFilterBtn.style.color = "white";
 
