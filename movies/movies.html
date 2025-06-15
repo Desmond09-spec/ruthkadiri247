@@ -1918,6 +1918,9 @@
 
                         switch (sortType) {
                             case "latest":
+                                document.getElementById("searchInput").value =
+                                    "";
+
                                 renderVideos(sortVideosByDate(true));
 
                                 document.getElementById(
@@ -1932,6 +1935,9 @@
                                 break;
 
                             case "popular":
+                                document.getElementById("searchInput").value =
+                                    "";
+
                                 renderVideos(sortVideosByViews(true));
 
                                 document.getElementById(
@@ -1945,6 +1951,9 @@
                                 break;
 
                             case "oldest":
+                              document.getElementById("searchInput").value =
+                                    "";
+                                    
                                 renderVideos(sortVideosByDate(false));
 
                                 document.getElementById(
@@ -1984,14 +1993,11 @@
                         });
 
                         if (results.length > 0) {
-                          
-                          document.getElementById(
+                            document.getElementById(
                                 "menu_add-filter-option"
                             ).innerText = "Search";
-                            
-                            bsCollapse.hide();
 
-                            
+                            bsCollapse.hide();
 
                             latestFilterBtn.style.color = "white";
 
