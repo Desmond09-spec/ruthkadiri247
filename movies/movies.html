@@ -732,7 +732,7 @@
                         <a
                             class="nav-link bookmark_coming-soon_muted"
                             href="#"
-                            onclick="showMoreFeatures()"
+                            onclick="showMoreFeaturesToast()"
                             >Bookmarks (Coming Soon!)</a
                         >
                     </li>
@@ -799,7 +799,7 @@
                     <i class="fa-solid fa-download fa-fade"></i>
                 </a>
 
-                <a onclick="showMoreFeatures()">
+                <a onclick="showMoreFeaturesToast()">
                     <i
                         class="fa-regular fa-bookmark bookmark"
                         aria-hidden="true"
@@ -1670,9 +1670,9 @@
                                 <br />
                                 <br />
 
-                                <strong>Note</strong>: The menu bar title reflects the active
-                                filter. The 'Latest' filter is applied by
-                                default each time the page loads.
+                                <strong>Note</strong>: The menu bar title
+                                reflects the active filter. The 'Latest' filter
+                                is applied by default each time the page loads.
                             </li>
                             <br />
                             <li>
@@ -1970,7 +1970,11 @@
                             .getElementById("searchInput")
                             .value.trim()
                             .toLowerCase();
-                        if (!query) return;
+                        if (!query) {
+                            document.getElementById("more-features").innerHTML =
+                                "Search input cannot be empty";
+                            showMoreFeatures();
+                        }
 
                         const results = allVideos.filter(video => {
                             const name =
@@ -1980,14 +1984,14 @@
 
                         if (results.length > 0) {
                             bsCollapse.hide();
-                            
+
                             latestFilterBtn.style.color = "white";
 
-                                popularFilterBtn.style.color = "white";
+                            popularFilterBtn.style.color = "white";
 
-                                oldestFilterBtn.style.color = "white";
-                                
-                                renderVideos(results);
+                            oldestFilterBtn.style.color = "white";
+
+                            renderVideos(results);
                         } else {
                             // alert(`Sorry, we couldn't find "${query}".`);
 
@@ -2020,6 +2024,14 @@
                         : "Show movie icons";
                 });
             });
+        </script>
+
+        <script>
+            function showMoreFeaturesToast() {
+                document.getElementById("more-features").innerText =
+                    "More features coming soon!";
+                showMoreFeatures();
+            }
         </script>
 
         <script>
