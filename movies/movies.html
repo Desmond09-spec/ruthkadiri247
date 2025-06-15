@@ -1980,13 +1980,14 @@
 
                         if (results.length > 0) {
                             bsCollapse.hide();
-                            renderVideos(results);
+                            
                             latestFilterBtn.style.color = "white";
 
                                 popularFilterBtn.style.color = "white";
 
                                 oldestFilterBtn.style.color = "white";
-                                break;
+                                
+                                renderVideos(results);
                         } else {
                             // alert(`Sorry, we couldn't find "${query}".`);
 
