@@ -1830,6 +1830,77 @@
         </script>
 
         <script>
+            function levenshteinDistance(a, b) {
+                const m = a.length,
+                    n = b.length;
+                const dp = Array.from({ length: m + 1 }, () =>
+                    Array(n + 1).fill(0)
+                );
+
+                for (let i = 0; i <= m; i++) dp[i][0] = i;
+                for (let j = 0; j <= n; j++) dp[0][j] = j;
+
+                for (let i = 1; i <= m; i++) {
+                    for (let j = 1; j <= n; j++) {
+                        if (a[i - 1] === b[j - 1]) {
+                            dp[i][j] = dp[i - 1][j - 1];
+                        } else {
+                            dp[i][j] =
+                                1 +
+                                Math.min(
+                                    dp[i - 1][j - 1],
+                                    dp[i][j - 1],
+                                    dp[i - 1][j]
+                                );
+                        }
+                    }
+                }
+
+                return dp[m][n];
+            }
+
+            function getSmartRelevanceScore(query, title) {
+                const normalize = str =>
+                    str
+                        .toLowerCase()
+                        .replace(/[^\w\s]/g, "") // remove punctuation
+                        .split(/\s+/)
+                        .filter(Boolean);
+
+                const queryWords = normalize(query);
+                const titleWords = normalize(title);
+
+                // Build word sets
+                const titleSet = new Set(titleWords);
+                const querySet = new Set(queryWords);
+
+                const isFuzzyMatch = (a, b) => {
+                    const distance = levenshteinDistance(a, b);
+                    const maxLen = Math.max(a.length, b.length);
+                    return distance / maxLen <= 0.25; // allow ≤ 25% typo rate
+                };
+
+                let matchCount = 0;
+
+                querySet.forEach(qw => {
+                    // Try to find exact or fuzzy matches
+                    for (let tw of titleSet) {
+                        if (
+                            tw.includes(qw) ||
+                            qw.includes(tw) ||
+                            (qw.length >= 3 &&
+                                tw.length >= 3 &&
+                                isFuzzyMatch(qw, tw))
+                        ) {
+                            matchCount++;
+                            break;
+                        }
+                    }
+                });
+
+                return matchCount / queryWords.length; // Based on query length
+            }
+
             document.addEventListener("DOMContentLoaded", function () {
                 const videoContainer = document.querySelector(".container");
                 const allVideos = Array.from(
@@ -1951,9 +2022,9 @@
                                 break;
 
                             case "oldest":
-                              document.getElementById("searchInput").value =
+                                document.getElementById("searchInput").value =
                                     "";
-                                    
+
                                 renderVideos(sortVideosByDate(false));
 
                                 document.getElementById(
@@ -1970,8 +2041,88 @@
                     });
                 });
 
-                // SEARCH FUNCTIONALITY
-                document
+                // SMART SEARCH FUNCTIONALITY
+                //document
+          //          .getElementById("searchForm")
+                  //  .addEventListener("submit", function (e) {
+                 //       e.preventDefault();
+
+                  //      const query = document
+                    //        .getElementById("searchInput")
+                      //      .value.trim()
+                        //    .toLowerCase();
+
+                        //if (!query) {
+                          //  document.getElementById("more-features").innerHTML =
+                            //    "Search input cannot be empty.";
+                            //showMoreFeatures();
+                            //return;
+                        //}
+
+                        //const results = allVideos.filter(video => {
+                          //  const name =
+                            //    video.dataset.title?.toLowerCase() || "";
+                          //  return name.includes(query);
+                    //    });
+
+                 //       if (results.length > 0) {
+                   //         document.getElementById(
+                     //           "menu_add-filter-option"
+                       //     ).innerText = "Search";
+
+                     //       bsCollapse.hide();
+                       //     latestFilterBtn.style.color = "white";
+                         //   popularFilterBtn.style.color = "white";
+                           // oldestFilterBtn.style.color = "white";
+
+                          //  renderVideos(results);
+                   //     } else {
+                            // No exact matches — try fuzzy match
+                 //           const fuzzyMatches = [];
+
+                     //       allVideos.forEach(video => {
+                   //             const title = video.dataset.title;
+              //                  const score = getSmartRelevanceScore(
+                      //              query,
+                        //            title
+                          //      );
+
+                            //    if (score >= 0.3) {
+                              //      fuzzyMatches.push({ video, score });
+                       //         }
+                         //   });
+
+                           // if (fuzzyMatches.length > 0) {
+                                // Sort descending by score
+                          //      fuzzyMatches.sort((a, b) => b.score - a.score);
+
+                                // Extract DOM elements
+                    //            const matchedVideos = fuzzyMatches.map(
+                        //            match => match.video
+                     //           );
+
+                      //          renderVideos(matchedVideos);
+
+                         //       document.getElementById(
+                      //              "menu_add-filter-option"
+                    //            ).innerText = "Search";
+
+                          //      bsCollapse.hide();
+                            //    latestFilterBtn.style.color = "white";
+                              //  popularFilterBtn.style.color = "white";
+                                //oldestFilterBtn.style.color = "white";
+                     //       } else {
+                   //            document.getElementById(
+                  //                  "couldnt-find"
+                 //               ).innerText = `Sorry, we couldn't find "${query}".`;
+                     //           showCouldntFind();
+                 //           }
+               //         }
+             //       });
+             
+             // SEARCH FUNCTIONALITY
+             
+             document
                     .getElementById("searchForm")
                     .addEventListener("submit", function (e) {
                         e.preventDefault();
